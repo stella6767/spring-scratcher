@@ -23,11 +23,10 @@ class TodoDtoRepositoryTest(
             todoRepository.findById(1)
 
         val todo =
-            todoRepository.findByIdAsToDto(1)
+            todoRepository.findByContentAsToDtos(null)
 
         println(todoRecord)
         println(todo)
-
     }
 
 

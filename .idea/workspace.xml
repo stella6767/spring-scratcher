@@ -156,7 +156,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.TodoDtoRepositoryTest.findTodosByPageTest">
+  <component name="RunManager" selected="Gradle.TodoDtoRepositoryTest.findByIdTest">
     <configuration name="TodoDtoRepositoryTest.findByIdTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -317,9 +317,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.TodoDtoRepositoryTest.findByIdTest" />
         <item itemvalue="Gradle.TodoDtoRepositoryTest.findTodosByPageTest" />
         <item itemvalue="Gradle.flyway-jooq [flywayRepair]" />
-        <item itemvalue="Gradle.TodoDtoRepositoryTest.findByIdTest" />
         <item itemvalue="Gradle.TodoDtoRepositoryTest.test" />
         <item itemvalue="Gradle.TodoRepositoryTest.test" />
       </list>
@@ -340,7 +340,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1740984138672</updated>
-      <workItem from="1740984140046" duration="23414000" />
+      <workItem from="1740984140046" duration="24235000" />
     </task>
     <servers />
   </component>

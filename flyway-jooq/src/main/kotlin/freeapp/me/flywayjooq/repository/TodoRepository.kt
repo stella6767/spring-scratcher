@@ -3,6 +3,7 @@ package freeapp.me.flywayjooq.repository
 import freeapp.me.flywayjooq.dto.PageImpl
 import freeapp.me.flywayjooq.dto.TodoDto
 import org.jooq.DSLContext
+import org.jooq.TableField
 import org.jooq.generated.tables.Todo.Companion.TODO_
 import org.jooq.generated.tables.records.TodoRecord
 import org.springframework.stereotype.Repository
@@ -54,6 +55,15 @@ class TodoRepository(
     }
 
 
+    fun findByContentAsToDtos(content: String?): MutableList<TodoDto> {
 
+        return dslContext.select(*TODO_.fields())
+            .from(TODO_)
+            .where(TODO_.CONTENT.eqifNotNull(content))
+            .fetchInto(TodoDto::class.java)
+    }
 
 }
+
+
+
