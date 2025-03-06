@@ -65,8 +65,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Kotlin Class" />
         <option value="JUnit5 Test Class" />
+        <option value="Kotlin Class" />
       </list>
     </option>
   </component>
@@ -76,6 +76,9 @@
   <component name="GitToolBoxStore">
     <option name="projectConfigVersion" value="5" />
   </component>
+  <component name="KubernetesApiProvider"><![CDATA[{
+  "isMigrated": true
+}]]></component>
   <component name="ProjectColorInfo"><![CDATA[{
   "associatedIndex": 7
 }]]></component>
@@ -98,22 +101,30 @@
     "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.FlywayJooqApplication-prod.executor": "Run",
     "Spring Boot.FlywayJooqApplication.executor": "Run",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "dart.analysis.tool.window.visible": "false",
     "jdk.selected.JAVA_MODULE": "zulu-21",
     "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/stella6767/IdeaProjects/scratcher/flyway-jooq/src/main/resources/db/migration/common",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "run.configurations.included.in.services": "true",
     "show.migrate.to.gradle.popup": "false",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/flyway-jooq/src/main/resources/db/migration/common" />
+      <recent name="$PROJECT_DIR$/flyway-jooq/src/main/resources/db/migration/local" />
+      <recent name="$PROJECT_DIR$/flyway-jooq/src/main/resources/db/migration" />
+    </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
@@ -124,7 +135,16 @@
       <recent name="freeapp.me.flywayjooq.entity" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.FlywayJooqApplication">
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="MicronautRunConfigurationType" />
+        <option value="QuarkusRunConfigurationType" />
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.FlywayJooqApplication-prod">
     <configuration name="TodoRepositoryTest.test" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -171,6 +191,14 @@
       <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
+    <configuration name="FlywayJooqApplication-prod" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <option name="ACTIVE_PROFILES" value="prod" />
+      <module name="flyway-jooq.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="freeapp.me.flywayjooq.FlywayJooqApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="FlywayJooqApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="flyway-jooq.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="freeapp.me.flywayjooq.FlywayJooqApplication" />
@@ -185,6 +213,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="YoutubeOauth2ApiApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="youtube-oauth2-api.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="freeapp.me.youtubeoauth2api.YoutubeOauth2ApiApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Gradle.flyway-jooq [generateTodoDBJooq]" />
+      <item itemvalue="Gradle.TodoRepositoryTest.test" />
+      <item itemvalue="Spring Boot.FlywayJooqApplication" />
+      <item itemvalue="Spring Boot.FlywayJooqApplication-prod" />
+      <item itemvalue="Spring Boot.ScratcherApplication" />
+      <item itemvalue="Spring Boot.YoutubeOauth2ApiApplication" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.TodoRepositoryTest.test" />
@@ -207,7 +250,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1740984138672</updated>
-      <workItem from="1740984140046" duration="11862000" />
+      <workItem from="1740984140046" duration="15866000" />
     </task>
     <servers />
   </component>
