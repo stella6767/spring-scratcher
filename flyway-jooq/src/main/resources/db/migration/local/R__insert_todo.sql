@@ -1,2 +1,10 @@
-insert Todo values (1, 'test1', 'N', now());
-insert Todo values (2, 'test2', 'N', now());
+insert Todo values (3, 'test3', 'N', now());
+insert Todo values (4, 'test4', 'N', now());
+insert Todo values (5, 'test5', 'N', now());
+insert Todo values (6, 'test6', 'N', now());
+insert Todo values (7, 'test7', 'N', now());
+insert Todo values (8, 'test8', 'N', now());
+insert Todo values (9, 'test9', 'N', now());
+insert Todo values (10, 'test10', 'N', now());
+insert Todo values (11, 'test11', 'N', now());
+insert Todo values (12, 'test12', 'N', now());

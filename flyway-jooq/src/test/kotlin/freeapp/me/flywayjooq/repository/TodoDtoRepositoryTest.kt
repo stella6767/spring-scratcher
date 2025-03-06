@@ -1,6 +1,5 @@
 package freeapp.me.flywayjooq.repository
 
-import org.junit.jupiter.api.Assertions.*
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.TestConstructor
 import kotlin.test.Test
@@ -15,6 +14,30 @@ class TodoDtoRepositoryTest(
     @Test
     fun test() {
         todoRepository.test()
+    }
+
+    @Test
+    fun findByIdTest() {
+
+        val todoRecord =
+            todoRepository.findById(1)
+
+        val todo =
+            todoRepository.findByIdAsToDto(1)
+
+        println(todoRecord)
+        println(todo)
+
+    }
+
+
+    @Test
+    fun findTodosByPageTest(){
+
+        val todosByPage =
+            todoRepository.findTodosByPage(1, 10)
+
+        println(todosByPage)
 
     }
 

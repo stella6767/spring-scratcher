@@ -1,9 +1,14 @@
+import org.flywaydb.gradle.FlywayExtension
+import org.gradle.internal.impldep.com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
+import org.jooq.meta.jaxb.ForcedType
+
 plugins {
     kotlin("jvm") version "1.9.25"
     kotlin("plugin.spring") version "1.9.25"
     id("org.springframework.boot") version "3.4.3"
     id("io.spring.dependency-management") version "1.1.7"
 
+    id("org.flywaydb.flyway") version "9.22.3"
     id("nu.studer.jooq") version "9.0" // JOOQ 코드 생성 플러그인
 }
 
@@ -15,6 +20,9 @@ java {
         languageVersion = JavaLanguageVersion.of(21)
     }
 }
+
+
+
 
 repositories {
     mavenCentral()
@@ -55,11 +63,26 @@ jooq {
                     user = dbUser
                     password = dbPassword
                 }
+
+
                 generator.apply {
                     name = "org.jooq.codegen.KotlinGenerator" // 코틀린 제너레이터 명시
                     database.apply {
                         name = "org.jooq.meta.mysql.MySQLDatabase"
                         inputSchema = "todo"
+                        //forcedTypes.onEach {}
+//                        forcedTypes.add(ForcedType().withUserType("java.lang.Long").withIncludeTypes("int unsigned"))
+//                        forcedTypes.add(
+//                            ForcedType().withUserType("java.lang.Long")
+//                                .withIncludeTypes("INTEGER") // ✅ 대소문자 무시
+//                        )
+//                        forcedTypes.add(ForcedType().withUserType("java.lang.Long").withIncludeTypes("bigint"))
+//                        forcedTypes.add(
+//                            ForcedType().withUserType("java.lang.Integer").withIncludeTypes("tinyint unsigned")
+//                        )
+//                        forcedTypes.add(
+//                            ForcedType().withUserType("java.lang.Integer").withIncludeTypes("smallint unsigned")
+//                        )
                     }
                     generate.apply {
                         //isDaos = true
@@ -69,6 +92,7 @@ jooq {
                         isDeprecated = false
                         isPojosAsKotlinDataClasses = true
                         isKotlinSetterJvmNameAnnotationsOnIsPrefix = true
+                        isJavaTimeTypes = true
                     }
                     target.apply {
                         directory = "build/generated-src/jooq/main"
@@ -77,6 +101,16 @@ jooq {
             }
         }
     }
+}
+
+configure<FlywayExtension> {
+    url = "jdbc:mysql://localhost:3306/todo"
+    user = dbUser
+    password = dbPassword
+    locations = arrayOf("filesystem:src/main/resources/db/migration/common","filesystem:src/main/resources/db/migration/local")
+
+    // Repair에 필요한 추가 옵션
+    //repair() // Flyway 9.x 이상에서 명시적 호출
 }
 
 
