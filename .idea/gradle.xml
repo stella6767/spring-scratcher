@@ -11,6 +11,22 @@
         </option>
       </GradleProjectSettings>
       <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/flyway-jooq/tsdownloader-cli" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/flyway-jooq/tsdownloader-cli" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/tsdownloader-cli" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/tsdownloader-cli" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/youtube-oauth2-api" />
         <option name="modules">
           <set>

@@ -1,0 +1,8 @@
+
+spring:
+  application:
+    name: ts-downloader
+
+  shell:
+    interactive:
+      enabled: true

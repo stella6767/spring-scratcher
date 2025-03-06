@@ -18,22 +18,24 @@ repositories {
     mavenCentral()
 }
 
+extra["springShellVersion"] = "3.4.0"
+
 dependencies {
 
-    // https://mvnrepository.com/artifact/com.google.apis/google-api-services-youtube
-    implementation("com.google.apis:google-api-services-youtube:v3-rev222-1.25.0")
-    implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
-    implementation("org.springframework.boot:spring-boot-starter-web")
-
-    implementation("gg.jte:jte:3.1.12")
-    implementation("gg.jte:jte-spring-boot-starter-3:3.1.12")
     implementation("io.github.microutils:kotlin-logging:3.0.4")
 
-    implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("org.springframework.shell:spring-shell-starter")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
+    testImplementation("org.springframework.shell:spring-shell-starter-test")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+}
+
+dependencyManagement {
+    imports {
+        mavenBom("org.springframework.shell:spring-shell-dependencies:${property("springShellVersion")}")
+    }
 }
 
 kotlin {
