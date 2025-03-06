@@ -1,14 +1,11 @@
-package freeapp.me.flywayjooq
+package freeapp.me.youtubeoauth2api
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class FlywayJooqApplication
-
-//https://www.jooq.org/
+class YoutubeOauth2ApiApplication
 
 fun main(args: Array<String>) {
-
-    runApplication<FlywayJooqApplication>(*args)
+    runApplication<YoutubeOauth2ApiApplication>(*args)
 }
