@@ -1,0 +1,26 @@
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${}
+            client-secret: ${}
+            scope:
+              - email
+              - profile
+              - https://www.googleapis.com/auth/youtube.readonly
+
+server:
+  port: 8080
+  servlet:
+    context-path: /
+    encoding:
+      charset: utf-8
+      enabled: true
+gg:
+  jte:
+    developmentMode: true
+    templateLocation: src/main/jte
+    templateSuffix: .jte

@@ -120,7 +120,7 @@
     "dart.analysis.tool.window.visible": "false",
     "jdk.selected.JAVA_MODULE": "zulu-21",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/stella6767/IdeaProjects/scratcher/flyway-jooq/src/main/resources/db/migration/common",
+    "last_opened_file_path": "/Users/stella6767/IdeaProjects/scratcher/youtube-oauth2-api/src/main/resources/static",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -133,9 +133,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/youtube-oauth2-api/src/main/resources/static" />
+      <recent name="$PROJECT_DIR$/youtube-oauth2-api/src/main" />
+      <recent name="$PROJECT_DIR$/youtube-oauth2-api/src/main/kotlin/freeapp/me/youtubeoauth2api" />
       <recent name="$PROJECT_DIR$/flyway-jooq/src/main/resources/db/migration/common" />
       <recent name="$PROJECT_DIR$/flyway-jooq/src/main/resources/db/migration/local" />
-      <recent name="$PROJECT_DIR$/flyway-jooq/src/main/resources/db/migration" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -340,7 +342,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1740984138672</updated>
-      <workItem from="1740984140046" duration="24235000" />
+      <workItem from="1740984140046" duration="24857000" />
     </task>
     <servers />
   </component>
