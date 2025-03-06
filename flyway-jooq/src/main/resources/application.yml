@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: flyway-jooq
+
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/todo
+    username: root
+    password: 1234
+
+  flyway:
+    enabled: true
+    baseline-on-migrate: true # ?? DB? ?? ??
+    locations: classpath:db/migration
+
+  jooq:
+    sql-dialect: mysql
