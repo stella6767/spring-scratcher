@@ -1,8 +1,8 @@
 spring:
+  profiles:
+    default: local
   application:
     name: flyway-jooq
-
-
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/todo
@@ -12,7 +12,42 @@ spring:
   flyway:
     enabled: true
     baseline-on-migrate: true # ?? DB? ?? ??
-    locations: classpath:db/migration
+    locations: classpath:db/migration/common
 
   jooq:
     sql-dialect: mysql
+
+---
+
+server:
+  config:
+    activate:
+      on-profile:
+        - local
+
+spring:
+  config:
+    activate:
+      on-profile:
+        - local
+
+  flyway:
+    locations: classpath:db/migration/common, classpath:db/migration/local
+
+---
+
+server:
+  config:
+    activate:
+      on-profile:
+        - prod
+
+spring:
+  config:
+    activate:
+      on-profile:
+        - prod
+
+  flyway:
+    locations: classpath:db/migration/common
+

@@ -1,7 +1,3 @@
-import nu.studer.gradle.jooq.JooqGenerate
-import org.jooq.meta.jaxb.Jdbc
-import org.jooq.meta.jaxb.Logging
-
 plugins {
     kotlin("jvm") version "1.9.25"
     kotlin("plugin.spring") version "1.9.25"

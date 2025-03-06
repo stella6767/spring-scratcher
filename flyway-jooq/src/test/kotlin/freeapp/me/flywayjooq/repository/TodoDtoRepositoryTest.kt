@@ -8,7 +8,7 @@ import kotlin.test.Test
 
 @SpringBootTest
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
-class TodoRepositoryTest(
+class TodoDtoRepositoryTest(
     private val todoRepository: TodoRepository,
 ) {
 
