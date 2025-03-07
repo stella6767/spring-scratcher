@@ -26,6 +26,9 @@ out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 
+DownloaderTest.kt
+*.har
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/

@@ -44,28 +44,15 @@
         <task path="$PROJECT_DIR$/flyway-jooq">
           <activation />
         </task>
+        <task path="$PROJECT_DIR$/tsdownloader-cli">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <expand>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="flyway-jooq" type="f1a62948:ProjectNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="flyway-jooq" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="flyway-jooq" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="flyway" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="flyway-jooq" type="f1a62948:ProjectNode" />
-                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
+                <item name="tsdownloader-cli" type="f1a62948:ProjectNode" />
               </path>
             </expand>
             <select />
@@ -112,6 +99,8 @@
     "Gradle.TodoDtoRepositoryTest.findTodosByPageTest.executor": "Run",
     "Gradle.TodoDtoRepositoryTest.test.executor": "Run",
     "Gradle.TodoRepositoryTest.test.executor": "Run",
+    "Gradle.TsdownloaderCliApplicationTests.findMasterM3UTest.executor": "Run",
+    "Gradle.TsdownloaderCliApplicationTests.retrieveM3U8requestFilesTest.executor": "Run",
     "Gradle.flyway-jooq [flywayRepair].executor": "Run",
     "Gradle.flyway-jooq [generateTodoDBJooq].executor": "Run",
     "RequestMappingsPanelOrder0": "0",
@@ -123,12 +112,13 @@
     "Spring Boot.FlywayJooqApplication-prod.executor": "Run",
     "Spring Boot.FlywayJooqApplication.executor": "Run",
     "Spring Boot.TsdownloaderCliApplication.executor": "Run",
+    "android.gradle.sync.needed": "true",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "dart.analysis.tool.window.visible": "false",
     "jdk.selected.JAVA_MODULE": "zulu-21",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/stella6767/IdeaProjects/scratcher/youtube-oauth2-api/src/main/resources/static",
+    "last_opened_file_path": "/Users/stella6767/IdeaProjects/scratcher/tsdownloader-cli/src/main/kotlin/freeapp/me/tsdownloadercli/dto",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -141,11 +131,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/tsdownloader-cli/src/main/kotlin/freeapp/me/tsdownloadercli/dto" />
+      <recent name="$PROJECT_DIR$/tsdownloader-cli/src/main/kotlin/freeapp/me/tsdownloadercli/service" />
       <recent name="$PROJECT_DIR$/youtube-oauth2-api/src/main/resources/static" />
       <recent name="$PROJECT_DIR$/youtube-oauth2-api/src/main" />
       <recent name="$PROJECT_DIR$/youtube-oauth2-api/src/main/kotlin/freeapp/me/youtubeoauth2api" />
-      <recent name="$PROJECT_DIR$/flyway-jooq/src/main/resources/db/migration/common" />
-      <recent name="$PROJECT_DIR$/flyway-jooq/src/main/resources/db/migration/local" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -166,7 +156,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.TsdownloaderCliApplication">
+  <component name="RunManager" selected="Gradle.TsdownloaderCliApplicationTests.retrieveM3U8requestFilesTest">
     <configuration name="TodoDtoRepositoryTest.findByIdTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -215,10 +205,10 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="TodoDtoRepositoryTest.test" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="TsdownloaderCliApplicationTests.findMasterM3UTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/flyway-jooq" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/tsdownloader-cli" />
         <option name="externalSystemIdString" value="GRADLE" />
         <option name="scriptParameters" value="" />
         <option name="taskDescriptions">
@@ -228,7 +218,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;freeapp.me.flywayjooq.repository.TodoDtoRepositoryTest.test&quot;" />
+            <option value="&quot;freeapp.me.tsdownloadercli.TsdownloaderCliApplicationTests.findMasterM3UTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -239,10 +229,10 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="TodoRepositoryTest.test" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="TsdownloaderCliApplicationTests.retrieveM3U8requestFilesTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/flyway-jooq" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/tsdownloader-cli" />
         <option name="externalSystemIdString" value="GRADLE" />
         <option name="scriptParameters" value="" />
         <option name="taskDescriptions">
@@ -252,7 +242,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;freeapp.me.flywayjooq.repository.TodoRepositoryTest.test&quot;" />
+            <option value="&quot;freeapp.me.tsdownloadercli.TsdownloaderCliApplicationTests.retrieveM3U8requestFilesTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -324,9 +314,9 @@
     <list>
       <item itemvalue="Gradle.TodoDtoRepositoryTest.findByIdTest" />
       <item itemvalue="Gradle.TodoDtoRepositoryTest.findTodosByPageTest" />
-      <item itemvalue="Gradle.TodoDtoRepositoryTest.test" />
+      <item itemvalue="Gradle.TsdownloaderCliApplicationTests.findMasterM3UTest" />
+      <item itemvalue="Gradle.TsdownloaderCliApplicationTests.retrieveM3U8requestFilesTest" />
       <item itemvalue="Gradle.flyway-jooq [flywayRepair]" />
-      <item itemvalue="Gradle.TodoRepositoryTest.test" />
       <item itemvalue="Spring Boot.TsdownloaderCliApplication" />
       <item itemvalue="Spring Boot.FlywayJooqApplication" />
       <item itemvalue="Spring Boot.FlywayJooqApplication-prod" />
@@ -335,11 +325,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.TsdownloaderCliApplicationTests.retrieveM3U8requestFilesTest" />
+        <item itemvalue="Gradle.TsdownloaderCliApplicationTests.findMasterM3UTest" />
         <item itemvalue="Gradle.TodoDtoRepositoryTest.findByIdTest" />
         <item itemvalue="Gradle.TodoDtoRepositoryTest.findTodosByPageTest" />
         <item itemvalue="Gradle.flyway-jooq [flywayRepair]" />
-        <item itemvalue="Gradle.TodoDtoRepositoryTest.test" />
-        <item itemvalue="Gradle.TodoRepositoryTest.test" />
       </list>
     </recent_temporary>
   </component>
@@ -358,7 +348,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1740984138672</updated>
-      <workItem from="1740984140046" duration="27285000" />
+      <workItem from="1740984140046" duration="40681000" />
     </task>
     <servers />
   </component>
