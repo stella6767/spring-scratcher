@@ -5,16 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8b67e908-bc4b-470a-928e-3a46081fc7f4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/flyway-jooq/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flyway-jooq/src/main/kotlin/freeapp/me/flywayjooq/FlywayJooqApplication.kt" beforeDir="false" afterPath="$PROJECT_DIR$/flyway-jooq/src/main/kotlin/freeapp/me/flywayjooq/FlywayJooqApplication.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-shell.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ts-downloader.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsdownloader-cli/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/tsdownloader-cli/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsdownloader-cli/src/main/kotlin/freeapp/me/tsdownloadercli/service/PlayWriterService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/tsdownloader-cli/src/main/kotlin/freeapp/me/tsdownloadercli/service/PlayWriterService.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,6 +49,23 @@
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="tsdownloader-cli" type="f1a62948:ProjectNode" />
               </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="tsdownloader-cli" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="tsdownloader-cli" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="tsdownloader-cli" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build setup" type="c8890929:TasksNode$1" />
+              </path>
             </expand>
             <select />
           </tree_state>
@@ -77,12 +89,15 @@
   <component name="GitToolBoxStore">
     <option name="projectConfigVersion" value="5" />
   </component>
-  <component name="KubernetesApiProvider"><![CDATA[{
-  "isMigrated": true
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 7
-}]]></component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="2tnNyb40oE5ZLtYFS7eIofdyosA" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -95,6 +110,8 @@
   "keyToString": {
     "Gradle.Build flyway-jooq.executor": "Run",
     "Gradle.Build tsdownloader-cli.executor": "Run",
+    "Gradle.DownloaderTest.jsonParserTest.executor": "Run",
+    "Gradle.DownloaderTest.retrieveM3U8requestFilesTest.executor": "Run",
     "Gradle.TodoDtoRepositoryTest.findByIdTest.executor": "Run",
     "Gradle.TodoDtoRepositoryTest.findTodosByPageTest.executor": "Run",
     "Gradle.TodoDtoRepositoryTest.test.executor": "Run",
@@ -103,6 +120,7 @@
     "Gradle.TsdownloaderCliApplicationTests.retrieveM3U8requestFilesTest.executor": "Run",
     "Gradle.flyway-jooq [flywayRepair].executor": "Run",
     "Gradle.flyway-jooq [generateTodoDBJooq].executor": "Run",
+    "Gradle.tsdownloader-cli [clean].executor": "Run",
     "RequestMappingsPanelOrder0": "0",
     "RequestMappingsPanelOrder1": "1",
     "RequestMappingsPanelWidth0": "75",
@@ -112,19 +130,19 @@
     "Spring Boot.FlywayJooqApplication-prod.executor": "Run",
     "Spring Boot.FlywayJooqApplication.executor": "Run",
     "Spring Boot.TsdownloaderCliApplication.executor": "Run",
-    "android.gradle.sync.needed": "true",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "dart.analysis.tool.window.visible": "false",
     "jdk.selected.JAVA_MODULE": "zulu-21",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/stella6767/IdeaProjects/scratcher/tsdownloader-cli/src/main/kotlin/freeapp/me/tsdownloadercli/dto",
+    "last_opened_file_path": "/Users/stella6767/IdeaProjects/scratcher",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "run.configurations.included.in.services": "true",
+    "settings.editor.selected.configurable": "vcs.Git",
     "show.migrate.to.gradle.popup": "false",
     "vue.rearranger.settings.migration": "true"
   }
@@ -156,11 +174,11 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.TsdownloaderCliApplicationTests.retrieveM3U8requestFilesTest">
-    <configuration name="TodoDtoRepositoryTest.findByIdTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunManager" selected="Gradle.DownloaderTest.retrieveM3U8requestFilesTest">
+    <configuration name="DownloaderTest.jsonParserTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/flyway-jooq" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/tsdownloader-cli" />
         <option name="externalSystemIdString" value="GRADLE" />
         <option name="scriptParameters" value="" />
         <option name="taskDescriptions">
@@ -170,7 +188,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;freeapp.me.flywayjooq.repository.TodoDtoRepositoryTest.findByIdTest&quot;" />
+            <option value="&quot;freeapp.me.tsdownloadercli.DownloaderTest.jsonParserTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -181,10 +199,10 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="TodoDtoRepositoryTest.findTodosByPageTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="DownloaderTest.retrieveM3U8requestFilesTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/flyway-jooq" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/tsdownloader-cli" />
         <option name="externalSystemIdString" value="GRADLE" />
         <option name="scriptParameters" value="" />
         <option name="taskDescriptions">
@@ -194,7 +212,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;freeapp.me.flywayjooq.repository.TodoDtoRepositoryTest.findTodosByPageTest&quot;" />
+            <option value="&quot;freeapp.me.tsdownloadercli.DownloaderTest.retrieveM3U8requestFilesTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -253,18 +271,18 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="flyway-jooq [flywayRepair]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="tsdownloader-cli [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/flyway-jooq" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/tsdownloader-cli" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
+        <option name="scriptParameters" value="--stacktrace" />
         <option name="taskDescriptions">
           <list />
         </option>
         <option name="taskNames">
           <list>
-            <option value="flywayRepair" />
+            <option value="clean" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -312,11 +330,11 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Gradle.TodoDtoRepositoryTest.findByIdTest" />
-      <item itemvalue="Gradle.TodoDtoRepositoryTest.findTodosByPageTest" />
+      <item itemvalue="Gradle.DownloaderTest.jsonParserTest" />
+      <item itemvalue="Gradle.DownloaderTest.retrieveM3U8requestFilesTest" />
       <item itemvalue="Gradle.TsdownloaderCliApplicationTests.findMasterM3UTest" />
       <item itemvalue="Gradle.TsdownloaderCliApplicationTests.retrieveM3U8requestFilesTest" />
-      <item itemvalue="Gradle.flyway-jooq [flywayRepair]" />
+      <item itemvalue="Gradle.tsdownloader-cli [clean]" />
       <item itemvalue="Spring Boot.TsdownloaderCliApplication" />
       <item itemvalue="Spring Boot.FlywayJooqApplication" />
       <item itemvalue="Spring Boot.FlywayJooqApplication-prod" />
@@ -325,11 +343,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.DownloaderTest.retrieveM3U8requestFilesTest" />
+        <item itemvalue="Gradle.tsdownloader-cli [clean]" />
+        <item itemvalue="Gradle.DownloaderTest.jsonParserTest" />
         <item itemvalue="Gradle.TsdownloaderCliApplicationTests.retrieveM3U8requestFilesTest" />
         <item itemvalue="Gradle.TsdownloaderCliApplicationTests.findMasterM3UTest" />
-        <item itemvalue="Gradle.TodoDtoRepositoryTest.findByIdTest" />
-        <item itemvalue="Gradle.TodoDtoRepositoryTest.findTodosByPageTest" />
-        <item itemvalue="Gradle.flyway-jooq [flywayRepair]" />
       </list>
     </recent_temporary>
   </component>
@@ -348,7 +366,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1740984138672</updated>
-      <workItem from="1740984140046" duration="40681000" />
+      <workItem from="1740984140046" duration="46947000" />
+      <workItem from="1741320833877" duration="25000" />
     </task>
     <servers />
   </component>

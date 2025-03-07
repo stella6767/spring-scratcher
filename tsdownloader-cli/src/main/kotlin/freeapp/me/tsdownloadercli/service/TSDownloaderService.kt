@@ -12,9 +12,7 @@ import java.nio.file.Paths
 class TSDownloaderService {
 
     private val log = KotlinLogging.logger {  }
-
     private val videoDownloaderUtil = VideoDownloaderUtil()
-
     private val playWriterService = PlayWriterService()
 
     fun downloadTsByUrl(url: String): File {

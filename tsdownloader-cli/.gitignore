@@ -28,6 +28,7 @@ out/
 
 DownloaderTest.kt
 *.har
+*.log
 
 ### NetBeans ###
 /nbproject/private/
