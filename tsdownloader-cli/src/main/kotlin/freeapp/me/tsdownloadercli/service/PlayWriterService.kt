@@ -4,7 +4,9 @@ import com.google.gson.JsonParser
 import com.microsoft.playwright.*
 import com.microsoft.playwright.options.HarMode
 import com.microsoft.playwright.options.LoadState
+import freeapp.me.tsdownloadercli.util.PlaywrightStealth
 import mu.KotlinLogging
+import java.nio.file.Path
 import java.nio.file.Paths
 
 
@@ -39,16 +41,7 @@ class PlayWriterService(
 
         val page = context.newPage()
 
-        page.addInitScript(
-            """
-                Object.defineProperty(navigator, 'webdriver', {
-                    get: () => undefined
-                });
-                window.chrome = { runtime: {} };
-                """
-        )
-
-
+        PlaywrightStealth.applyStealth(page)
 
         page.onRequest { request ->
             val url = request.url()
@@ -70,10 +63,9 @@ class PlayWriterService(
 //            }
         }
 
-        page.onFrameDetached { req ->
-            println("Sub frame: ${req.url()}") // iframe 내부 요청 캡처
-        }
-
+//        page.onFrameDetached { req ->
+//            println("Sub frame: ${req.url()}") // iframe 내부 요청 캡처
+//        }
 
         // 5. 페이지 네비게이션 실행
         try {
@@ -94,6 +86,8 @@ class PlayWriterService(
 //        }
 
 //        Thread.sleep(10000)
+
+        //page.screenshot(Page.ScreenshotOptions().setPath(Paths.get("example.png")))
 
         context.close()
         browser.close()

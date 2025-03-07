@@ -1,8 +1,9 @@
 package freeapp.me.tsdownloadercli.util
 
-import getText
+import com.google.gson.Gson
 import org.springframework.core.io.ClassPathResource
 import java.nio.charset.StandardCharsets
+
 
 class StealthConfig(
     val webdriver: Boolean = true,
@@ -31,7 +32,7 @@ class StealthConfig(
     val runOnInsecureOrigins: Boolean? = null
 ) {
 
-    private val SCRIPTS: Map<String, String> = mapOf(
+    private val scripts: Map<String, String> = mapOf(
         "chrome_csi" to fromFile("chrome.csi.js"),
         "chrome_app" to fromFile("chrome.app.js"),
         "chrome_runtime" to fromFile("chrome.runtime.js"),
@@ -54,33 +55,53 @@ class StealthConfig(
     )
 
 
+    fun getEnabledScripts(): List<String> {
 
-//    fun getEnabledScripts(): List<String> {
-//        val options = mapOf(
-//            "webgl_vendor" to vendor,
-//            "webgl_renderer" to renderer,
-//            "navigator_vendor" to navVendor,
-//            "navigator_platform" to navPlatform,
-//            "navigator_user_agent" to navUserAgent,
-//            "languages" to languages,
-//            "runOnInsecureOrigins" to runOnInsecureOrigins
-//        )
-//
-//        val jsScripts = mutableListOf<String>()
-//        jsScripts.add("const opts = ${Json.encodeToString(options)};")
-//        jsScripts.add(scripts["utils"]!!)
-//
-//        if (webdriver) jsScripts.add(scripts["webdriver"]!!)
-//        if (navigatorPlugins) jsScripts.add(scripts["navigator_plugins"]!!)
-//        if (chromeRuntime) jsScripts.add(scripts["chrome_runtime"]!!)
-//
-//        return jsScripts
-//    }
+        val options = mapOf(
+            "webgl_vendor" to vendor,
+            "webgl_renderer" to renderer,
+            "navigator_vendor" to navVendor,
+            "navigator_platform" to navPlatform,
+            "navigator_user_agent" to navUserAgent,
+            "languages" to languages,
+            "runOnInsecureOrigins" to runOnInsecureOrigins
+        )
+
+        val gson = Gson()
+        val jsScripts = mutableListOf<String>()
+
+        jsScripts.add("const opts = ${gson.toJson(options)};")
+        scripts["utils"]?.let { jsScripts.add(it) }
+        if (webdriver) scripts["webdriver"]?.let { jsScripts.add(it) }
+        if (navigatorPlugins) scripts["navigator_plugins"]?.let { jsScripts.add(it) }
+        if (chromeRuntime) scripts["chrome_runtime"]?.let { jsScripts.add(it) }
+
+        scripts["chrome_app"]?.let { if (chromeApp) jsScripts.add(it) }
+        scripts["chrome_csi"]?.let { if (chromeCsi) jsScripts.add(it) }
+        scripts["chrome_hairline"]?.let { if (hairline) jsScripts.add(it) }
+        scripts["chrome_load_times"]?.let { if (chromeLoadTimes) jsScripts.add(it) }
+        scripts["chrome_runtime"]?.let { if (chromeRuntime) jsScripts.add(it) }
+        scripts["iframe_content_window"]?.let { if (iframeContentWindow) jsScripts.add(it) }
+        scripts["media_codecs"]?.let { if (mediaCodecs) jsScripts.add(it) }
+        scripts["navigator_languages"]?.let { if (navigatorLanguages) jsScripts.add(it) }
+        scripts["navigator_permissions"]?.let { if (navigatorPermissions) jsScripts.add(it) }
+        scripts["navigator_platform"]?.let { if (navigatorPlatform) jsScripts.add(it) }
+        scripts["navigator_plugins"]?.let { if (navigatorPlugins) jsScripts.add(it) }
+        scripts["navigator_user_agent"]?.let { if (navigatorUserAgent) jsScripts.add(it) }
+        scripts["navigator_vendor"]?.let { if (navigatorVendor) jsScripts.add(it) }
+        scripts["webdriver"]?.let { if (webdriver) jsScripts.add(it) }
+        scripts["outerdimensions"]?.let { if (outerDimensions) jsScripts.add(it) }
+        scripts["webgl_vendor"]?.let { if (webglVendor) jsScripts.add(it) }
+
+        return jsScripts
+    }
+
 
 
     fun fromFile(name: String): String {
 
-        return ClassPathResource("static/js/$name").inputStream.readBytes().toString(StandardCharsets.UTF_8)
+        return ClassPathResource("static/js/$name")
+            .inputStream.readBytes().toString(StandardCharsets.UTF_8)
     }
 
 }
