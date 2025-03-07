@@ -26,73 +26,37 @@ class PlayWriterService(
             playwright.chromium().launch(
                 BrowserType.LaunchOptions()
                     .setHeadless(false)
-                    //.setArgs(listOf("--disable-features=DownloadsBlockSubframe"))// 자동 다운로드 방지
+                //.setArgs(listOf("--disable-features=DownloadsBlockSubframe"))// 자동 다운로드 방지
             )
 
         val context = browser.newContext(
             Browser.NewContextOptions()
                 .setStorageState(null) //캐시 비활성화.
-            //.setServiceWorkers(ServiceWorkerPolicy.BLOCK)
-            //.setIgnoreHTTPSErrors(true) // 3. HTTPS 오류 무시
-            //.setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36")
+                //.setServiceWorkers(ServiceWorkerPolicy.BLOCK)
+                //.setIgnoreHTTPSErrors(true) // 3. HTTPS 오류 무시
+                .setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36")
         )
 
         val page = context.newPage()
 
-        // ✅ 특정 요청을 차단하여 브라우저가 가져오지 않도록 함
-//        page.route("**/*.m3u8") { route ->
-//            println("🚫 m3u8 요청 차단됨: ${route.request().url()}")
-//            m3u8FilesList.add(route.request().url()) // URL만 저장
-//            //route.abort() // 요청 중단 (다운로드 방지)
-//            route.resume()
-//        }
+        page.addInitScript(
+            """
+                Object.defineProperty(navigator, 'webdriver', {
+                    get: () => undefined
+                });
+                window.chrome = { runtime: {} };
+                """
+        )
 
-//        page.route("**/*") { route ->
-//            val request = route.request()
-//
-//            println(request.url())
-//
-////            // 리다이렉트 비활성화 옵션
-////            val fetchOptions = Route.FetchOptions().apply {
-////                maxRedirects = 0
-////            }
-////            // 수정된 요청으로 fetch 실행
-////            val response = route.fetch(fetchOptions)
-////
-////            // 리다이렉트 응답 처리
-////            if (response.status() >= 300 && response.status() < 400) {
-////                val redirectUrl = response.headers()["location"]
-////                println("차단된 리다이렉트: $redirectUrl")
-////            }
-////            //response
-////            route.fulfill()
-//            route.resume()
-//        }
-
-
-        // 1. 라우팅 핸들러 설정 (모든 요청 가로챔)
-//        page.route("**/*") { route ->
-//            val request = route.request()
-//            val url = request.url()
-//            println(url)
-//            // 2. m3u8 요청만 필터링
-//            if (url.contains("m3u8")) {
-//                println("✅ 캡처 완료: $url")
-//                route.abort() // 3. 실제 요청 중단
-//            } else {
-//                route.resume() // 4. 다른 리소스는 정상 진행
-//            }
-//        }
-
-//        page.onResponse { response ->
-//            println(response.status())
-//            println(response.allHeaders())
-//        }
 
 
         page.onRequest { request ->
             val url = request.url()
-            println(">> Request: ${request.url()} ${request.resourceType()}")
+            if (request.resourceType() == "xhr" || request.resourceType() == "fetch") {
+                println(">> Request: ${request.url()} ${request.resourceType()}")
+            }
+
+
 //            if (url.contains("m3u8")) {
 //                println("🔗 동영상 URL 감지됨: $url")
 //                m3u8FilesList.add(url)
@@ -106,28 +70,18 @@ class PlayWriterService(
 //            }
         }
 
-////        page.onResponse { response ->
-////            println("<< Response: ${response.url()} ${response.status()}")
-////        }
-//        page.onRequestFailed { request ->
-//            println("!! Failed: ${request.url()} ${request.failure()}")
-//        }
-
-//        page.onFrameDetached { req ->
-//            println("Sub frame: ${req.url()}") // iframe 내부 요청 캡처
-//        }
+        page.onFrameDetached { req ->
+            println("Sub frame: ${req.url()}") // iframe 내부 요청 캡처
+        }
 
 
         // 5. 페이지 네비게이션 실행
         try {
             page.navigate(url)
-            page.waitForLoadState(LoadState.LOAD)
-
+            page.waitForLoadState(LoadState.NETWORKIDLE) // 네트워크 활동이 완료될 때까지 대기
         } catch (e: PlaywrightException) {
-            // 6. 의도된 abort는 예외로 처리되지 않음
             println("네비게이션 완료")
         }
-        // 네트워크 활동이 완료될 때까지 대기
 
 
 //        val found =

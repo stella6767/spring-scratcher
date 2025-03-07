@@ -1,8 +1,8 @@
 package freeapp.me.tsdownloadercli.service
 
 
-import freeapp.me.tsdownloadercli.dto.DownloaderTask
-import freeapp.me.tsdownloadercli.dto.ResultVO
+import freeapp.me.tsdownloadercli.util.DownloaderTask
+import freeapp.me.tsdownloadercli.util.ResultVO
 import mu.KotlinLogging
 import org.apache.commons.io.FilenameUtils
 import org.apache.commons.io.IOUtils

@@ -1,4 +1,4 @@
-package freeapp.me.tsdownloadercli.dto
+package freeapp.me.tsdownloadercli.util
 
 
 
