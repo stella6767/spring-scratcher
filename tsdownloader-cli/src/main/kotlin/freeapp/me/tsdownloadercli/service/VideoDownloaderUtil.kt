@@ -277,15 +277,6 @@ class VideoDownloaderUtil() {
             "User-Agent",
             "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36"
         )
-//        httpCon.addRequestProperty("Referer", "https://creative.rmishe.com/")
-//        httpCon.addRequestProperty("authority", "b-hls-23.sacdnssedge.com")
-//        httpCon.addRequestProperty("accept-language", "en-US,en;q=0.9")
-//        httpCon.addRequestProperty("Origin", "https://creative.rmishe.com")
-//        httpCon.addRequestProperty("if-modified-since", "Fri, 14 Feb 2025 16:25:10 GMT")
-//        httpCon.addRequestProperty("sec-fetch-site", "cross-site")
-//        httpCon.addRequestProperty("sec-fetch-Mode", "cors")
-//        httpCon.addRequestProperty("sec-fetch-Dest", "empty")
-
         httpCon.connect()
 
         val inputStream = httpCon.inputStream
