@@ -25,9 +25,6 @@ dependencies {
 
     implementation("ai.djl:api:0.32.0")
     implementation("ai.djl.pytorch:pytorch-engine:0.32.0")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("org.testng:testng:7.1.0")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
     runtimeOnly("ai.djl.pytorch:pytorch-native-auto:1.9.1")
 // https://mvnrepository.com/artifact/ai.djl.pytorch/pytorch-jni
     implementation("ai.djl.pytorch:pytorch-jni:2.5.1-0.32.0")
@@ -35,6 +32,8 @@ dependencies {
     implementation("ai.djl.pytorch:pytorch-native-cpu:2.5.1:osx-aarch64")
 
 
+    // https://mvnrepository.com/artifact/com.microsoft.onnxruntime/onnxruntime
+    implementation("com.microsoft.onnxruntime:onnxruntime:1.20.0")
 
 
     implementation("org.springframework.boot:spring-boot-starter-web")

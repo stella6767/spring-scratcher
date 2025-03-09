@@ -1,6 +1,9 @@
 package freeapp.me.springpytorch
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import org.junit.jupiter.api.Test
+import org.springframework.core.io.ClassPathResource
+import java.nio.charset.StandardCharsets
 
 
 //@SpringBootTest
@@ -8,25 +11,28 @@ class SpringPytorchApplicationTests {
 
     @Test
     fun contextLoads() {
+        //https://s3.amazonaws.com/deep-learning-models/image-models/imagenet_class_index.json
+        val json =
+            ClassPathResource("/static/imagenet_class.json")
+                .inputStream.readBytes().toString(StandardCharsets.UTF_8)
 
-        //val module = Module.load("lip2speech_final.pth")
+        //println(json)
+        val map = ObjectMapper().readValue(json, MutableMap::class.java)
 
-//        val inputVideo = File("test.mp4").readBytes()
-//        val videoTensor =
-//            Tensor.fromBlob(inputVideo, longArrayOf(1L, inputVideo.size.toLong()))
-//        val audioTensor: Tensor =
-//            Tensor.fromBlob(inputVideo, longArrayOf(1L, inputVideo.size.toLong()))
-//
-//        val tensor =
-//            module.forward(IValue.from(videoTensor)).toTensor()
-//
-//        val dataAsByteArray = tensor.dataAsByteArray
-//
-//        val file = File("new.mp3")
-//        file.writeBytes(dataAsByteArray)  // ByteArray를 파일로 저장
+        val labels = mutableListOf<String>()
 
+        map.entries.map {
+            //println(it)
+            val element =
+                it.value.toString()
+                    .replace("[", "")
+                    .replace("]", "")
+                    .replace(",", "")
+            labels.add(element)
+        }
 
-        println("???")
+        println(labels)
+
     }
 
 }
