@@ -26,6 +26,7 @@ class SpringPytorchApplicationTests {
 //        file.writeBytes(dataAsByteArray)  // ByteArray를 파일로 저장
 
 
+        println("???")
     }
 
 }
