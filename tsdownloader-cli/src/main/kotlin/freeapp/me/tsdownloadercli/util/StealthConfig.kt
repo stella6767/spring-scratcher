@@ -55,7 +55,7 @@ class StealthConfig(
     )
 
 
-    fun getEnabledScripts(): List<String> {
+    fun getEnabledScripts(): MutableMap<String, String> {
 
         val options = mapOf(
             "webgl_vendor" to vendor,
@@ -68,32 +68,35 @@ class StealthConfig(
         )
 
         val gson = Gson()
-        val jsScripts = mutableListOf<String>()
 
-        jsScripts.add("const opts = ${gson.toJson(options)};")
-        scripts["utils"]?.let { jsScripts.add(it) }
-        if (webdriver) scripts["webdriver"]?.let { jsScripts.add(it) }
-        if (navigatorPlugins) scripts["navigator_plugins"]?.let { jsScripts.add(it) }
-        if (chromeRuntime) scripts["chrome_runtime"]?.let { jsScripts.add(it) }
 
-        scripts["chrome_app"]?.let { if (chromeApp) jsScripts.add(it) }
-        scripts["chrome_csi"]?.let { if (chromeCsi) jsScripts.add(it) }
-        scripts["chrome_hairline"]?.let { if (hairline) jsScripts.add(it) }
-        scripts["chrome_load_times"]?.let { if (chromeLoadTimes) jsScripts.add(it) }
-        scripts["chrome_runtime"]?.let { if (chromeRuntime) jsScripts.add(it) }
-        scripts["iframe_content_window"]?.let { if (iframeContentWindow) jsScripts.add(it) }
-        scripts["media_codecs"]?.let { if (mediaCodecs) jsScripts.add(it) }
-        scripts["navigator_languages"]?.let { if (navigatorLanguages) jsScripts.add(it) }
-        scripts["navigator_permissions"]?.let { if (navigatorPermissions) jsScripts.add(it) }
-        scripts["navigator_platform"]?.let { if (navigatorPlatform) jsScripts.add(it) }
-        scripts["navigator_plugins"]?.let { if (navigatorPlugins) jsScripts.add(it) }
-        scripts["navigator_user_agent"]?.let { if (navigatorUserAgent) jsScripts.add(it) }
-        scripts["navigator_vendor"]?.let { if (navigatorVendor) jsScripts.add(it) }
-        scripts["webdriver"]?.let { if (webdriver) jsScripts.add(it) }
-        scripts["outerdimensions"]?.let { if (outerDimensions) jsScripts.add(it) }
-        scripts["webgl_vendor"]?.let { if (webglVendor) jsScripts.add(it) }
+        val scriptsMap = mutableMapOf<String, String>()
 
-        return jsScripts
+        // opts 설정 스크립트 추가
+        scriptsMap["opts"] = "const opts = ${gson.toJson(options)};"
+        // 조건에 따라 scriptsMap에 추가
+        scripts["utils"]?.let { scriptsMap["utils"] = it }
+        if (webdriver) scripts["webdriver"]?.let { scriptsMap["webdriver"] = it }
+        if (navigatorPlugins) scripts["navigator_plugins"]?.let { scriptsMap["navigator_plugins"] = it }
+        if (chromeRuntime) scripts["chrome_runtime"]?.let { scriptsMap["chrome_runtime"] = it }
+
+        scripts["chrome_app"]?.let { if (chromeApp) scriptsMap["chrome_app"] = it }
+        scripts["chrome_csi"]?.let { if (chromeCsi) scriptsMap["chrome_csi"] = it }
+        scripts["chrome_hairline"]?.let { if (hairline) scriptsMap["chrome_hairline"] = it }
+        scripts["chrome_load_times"]?.let { if (chromeLoadTimes) scriptsMap["chrome_load_times"] = it }
+        scripts["chrome_runtime"]?.let { if (chromeRuntime) scriptsMap["chrome_runtime"] = it }
+        scripts["iframe_content_window"]?.let { if (iframeContentWindow) scriptsMap["iframe_content_window"] = it }
+        scripts["media_codecs"]?.let { if (mediaCodecs) scriptsMap["media_codecs"] = it }
+        scripts["navigator_languages"]?.let { if (navigatorLanguages) scriptsMap["navigator_languages"] = it }
+        scripts["navigator_permissions"]?.let { if (navigatorPermissions) scriptsMap["navigator_permissions"] = it }
+        scripts["navigator_platform"]?.let { if (navigatorPlatform) scriptsMap["navigator_platform"] = it }
+        scripts["navigator_user_agent"]?.let { if (navigatorUserAgent) scriptsMap["navigator_user_agent"] = it }
+        scripts["navigator_vendor"]?.let { if (navigatorVendor) scriptsMap["navigator_vendor"] = it }
+        scripts["outerdimensions"]?.let { if (outerDimensions) scriptsMap["outerdimensions"] = it }
+        scripts["webgl_vendor"]?.let { if (webglVendor) scriptsMap["webgl_vendor"] = it }
+
+
+        return scriptsMap
     }
 
 

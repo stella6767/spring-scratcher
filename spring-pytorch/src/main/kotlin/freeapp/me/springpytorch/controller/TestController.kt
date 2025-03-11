@@ -14,6 +14,7 @@ class TestController(
 
     @GetMapping("/test")
     fun test(): String {
+
         var img =
             ImageFactory.getInstance().fromUrl("https://raw.githubusercontent.com/pytorch/hub/master/images/dog.jpg")
         img.wrappedImage

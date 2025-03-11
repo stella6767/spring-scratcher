@@ -11,6 +11,8 @@
  */
 const utils = {}
 
+console.log("why", utils);
+
 /**
  * Wraps a JS Proxy Handler and strips it's presence from error stacks, in case the traps throw.
  *

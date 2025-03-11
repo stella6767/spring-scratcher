@@ -33,6 +33,8 @@ dependencies {
 
 
     // https://mvnrepository.com/artifact/com.microsoft.onnxruntime/onnxruntime
+    //https://github.com/hilmiyafia/facegen
+    //https://onnxruntime.ai/docs/get-started/with-java.html
     implementation("com.microsoft.onnxruntime:onnxruntime:1.20.0")
 
 

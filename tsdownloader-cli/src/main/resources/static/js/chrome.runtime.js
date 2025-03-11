@@ -1,3 +1,5 @@
+console.log(utils)
+
 const STATIC_DATA = {
     "OnInstalledReason": {
         "CHROME_UPDATE": "chrome_update",

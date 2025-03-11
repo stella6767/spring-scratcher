@@ -4,9 +4,11 @@ import com.google.gson.JsonParser
 import com.microsoft.playwright.*
 import com.microsoft.playwright.options.HarMode
 import com.microsoft.playwright.options.LoadState
+import com.microsoft.playwright.options.Proxy
 import freeapp.me.tsdownloadercli.util.PlaywrightStealth
 import mu.KotlinLogging
-import java.nio.file.Path
+import net.lightbody.bmp.BrowserMobProxy
+import net.lightbody.bmp.BrowserMobProxyServer
 import java.nio.file.Paths
 
 
@@ -15,6 +17,16 @@ class PlayWriterService(
 ) {
 
     private val log = KotlinLogging.logger { }
+
+
+    /**
+     * Retrieve m3u8request files
+     *
+     * m3u8 network request 를 캡처하지 못하는 문제.. 이유를 알 수 없다. 일단 폐기처분.
+     *
+     * @param url
+     * @return
+     */
 
     fun retrieveM3U8requestFiles(url: String): List<String> {
 
@@ -27,18 +39,35 @@ class PlayWriterService(
             playwright.chromium().launch(
                 BrowserType.LaunchOptions()
                     .setHeadless(false)
-                //.setArgs(listOf("--disable-features=DownloadsBlockSubframe"))// 자동 다운로드 방지
+                    .setArgs(
+                        listOf(
+                            "--disable-blink-features=AutomationControlled",
+                            "--exclude-switches=enable-automation"
+                        )
+                    ) //자동화 탐지 회피
             )
+
+//        val proxy = BrowserMobProxyServer()
+//        proxy.start(60614)
+        //proxy.setTrustAllServers(true)
+
 
         val context = browser.newContext(
             Browser.NewContextOptions()
-                .setStorageState(null) //캐시 비활성화.
+                //.setStorageState(null) //캐시 비활성화.
                 //.setServiceWorkers(ServiceWorkerPolicy.BLOCK)
-                //.setIgnoreHTTPSErrors(true) // 3. HTTPS 오류 무시
+                .setIgnoreHTTPSErrors(true) // 3. HTTPS 오류 무시
+                //.setBypassCSP(true)
                 .setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36")
+                //.setProxy(Proxy("0.0.0.0:60614"))
         )
+
+
         val page = context.newPage()
-        //PlaywrightStealth.applyStealth(page)
+        PlaywrightStealth.applyStealth(page)
+
+        val webdriverFlag = page.evaluate("() => window.navigator.webdriver")
+        println("window navigator webdriver value: $webdriverFlag") // 예상 출력: null
 
         page.onRequest { request ->
             val url = request.url()
@@ -47,10 +76,21 @@ class PlayWriterService(
             }
         }
 
+//        context.onPage {page ->
+//            page.onRequest { request ->
+//                val url = request.url()
+//                if (request.resourceType() == "xhr" || request.resourceType() == "fetch") {
+//                    println(">> Request: ${request.url()} ${request.resourceType()}")
+//                }
+//            }
+//        }
+
+
         // 5. 페이지 네비게이션 실행
         try {
             page.navigate(url)
-            Thread.sleep(10000)
+            Thread.sleep(100000)
+            page.screenshot(Page.ScreenshotOptions().setPath(Paths.get("example2.png")))
             //page.waitForLoadState(LoadState.NETWORKIDLE) // 네트워크 활동이 완료될 때까지 대기
         } catch (e: PlaywrightException) {
             println("네비게이션 완료")

@@ -24,6 +24,10 @@ dependencies {
 
     implementation("io.github.microutils:kotlin-logging:3.0.4")
     implementation("com.microsoft.playwright:playwright:1.50.0")
+    // https://mvnrepository.com/artifact/net.lightbody.bmp/browsermob-core
+    implementation("net.lightbody.bmp:browsermob-core:2.1.5")
+
+
 
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.springframework.shell:spring-shell-starter")

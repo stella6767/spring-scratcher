@@ -62,7 +62,6 @@ class PyTorchService(
             println("Predicted class name: $className")
             println("Predicted class index: $indexOf")
 
-
             return classifications
         }
     }
