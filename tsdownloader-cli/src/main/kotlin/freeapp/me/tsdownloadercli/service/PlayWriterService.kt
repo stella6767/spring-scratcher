@@ -1,14 +1,14 @@
 package freeapp.me.tsdownloadercli.service
 
+import com.google.gson.Gson
 import com.google.gson.JsonParser
 import com.microsoft.playwright.*
 import com.microsoft.playwright.options.HarMode
 import com.microsoft.playwright.options.LoadState
-import com.microsoft.playwright.options.Proxy
+import freeapp.me.tsdownloadercli.util.HttpReqHeaderDto
+import freeapp.me.tsdownloadercli.util.M3u8RequestDto
 import freeapp.me.tsdownloadercli.util.PlaywrightStealth
 import mu.KotlinLogging
-import net.lightbody.bmp.BrowserMobProxy
-import net.lightbody.bmp.BrowserMobProxyServer
 import java.nio.file.Paths
 
 
@@ -17,6 +17,41 @@ class PlayWriterService(
 ) {
 
     private val log = KotlinLogging.logger { }
+    private val gson = Gson()
+    fun retrieveM3U8requestFilesByHarFile(harFilePath: String): MutableList<M3u8RequestDto> {
+
+        //todo path 전처리
+
+        val harPath =
+            Paths.get("/Users/stella6767/IdeaProjects/scratcher/tsdownloader-cli/caputre.har")
+
+        val jsonText = harPath.toFile().readText()
+        val harJson = JsonParser.parseString(jsonText).asJsonObject
+        val entries =
+            harJson.getAsJsonObject("log").getAsJsonArray("entries")
+
+        val m3u8RequestDtos:MutableList<M3u8RequestDto> = mutableListOf()
+
+        for (entry in entries) {
+            val request =
+                entry.asJsonObject.getAsJsonObject("request")
+            val url = request.get("url").asString
+            if (url.contains("m3u8")) {
+                val requestHeaders =
+                    request.get("headers").asJsonArray
+
+                val headerDtos =
+                    gson.fromJson(requestHeaders, Array<HttpReqHeaderDto>::class.java).toList()
+
+                val requestDto =
+                    M3u8RequestDto(reqHeaders = headerDtos, m3u8file = url)
+                m3u8RequestDtos.add(requestDto)
+            }
+        }
+
+        return m3u8RequestDtos
+    }
+
 
 
     /**
@@ -46,12 +81,6 @@ class PlayWriterService(
                         )
                     ) //자동화 탐지 회피
             )
-
-//        val proxy = BrowserMobProxyServer()
-//        proxy.start(60614)
-        //proxy.setTrustAllServers(true)
-
-
         val context = browser.newContext(
             Browser.NewContextOptions()
                 //.setStorageState(null) //캐시 비활성화.
@@ -59,7 +88,7 @@ class PlayWriterService(
                 .setIgnoreHTTPSErrors(true) // 3. HTTPS 오류 무시
                 //.setBypassCSP(true)
                 .setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36")
-                //.setProxy(Proxy("0.0.0.0:60614"))
+            //.setProxy(Proxy("0.0.0.0:60614"))
         )
 
 
@@ -75,16 +104,6 @@ class PlayWriterService(
                 println(">> Request: ${request.url()} ${request.resourceType()}")
             }
         }
-
-//        context.onPage {page ->
-//            page.onRequest { request ->
-//                val url = request.url()
-//                if (request.resourceType() == "xhr" || request.resourceType() == "fetch") {
-//                    println(">> Request: ${request.url()} ${request.resourceType()}")
-//                }
-//            }
-//        }
-
 
         // 5. 페이지 네비게이션 실행
         try {
@@ -102,6 +121,9 @@ class PlayWriterService(
 
         return m3u8FilesList
     }
+
+
+
 
 
     fun makeHarFileViaUrl(url: String) {
