@@ -2,7 +2,6 @@ package freeapp.me.qrgenerator
 
 import freeapp.me.qrgenerator.service.QrService
 import org.junit.jupiter.api.Test
-import org.springframework.boot.test.context.SpringBootTest
 
 //@SpringBootTest
 class QrGeneratorApplicationTests {
@@ -13,7 +12,7 @@ class QrGeneratorApplicationTests {
     fun contextLoads() {
 
         val generateQRCode =
-            qrService.generateQRCode(text = "test")
+            qrService.generateStaticQRCode(text = "https://www.freeapp.me/")
 
         println(generateQRCode)
 

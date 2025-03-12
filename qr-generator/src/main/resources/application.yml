@@ -1,9 +1,67 @@
+
+server:
+  port: 8080
+  servlet:
+    context-path: /
+    encoding:
+      charset: utf-8
+      enabled: true
+
+
 spring:
   application:
     name: qr-generator
 
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+  profiles:
+    default: dev
 
+---
+
+server:
+  config:
+    activate:
+      on-profile:
+        - dev
+
+spring:
+  config:
+    activate:
+      on-profile:
+        - dev
+
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      poll-interval: 5s
+      enabled: false
 
 gg:
   jte:
-    development-mode: true
+    templateLocation: src/main/jte
+    templateSuffix: .jte
+    developmentMode: true
+
+
+---
+
+server:
+  config:
+    activate:
+      on-profile:
+        - prod
+
+spring:
+  config:
+    activate:
+      on-profile:
+        - prod
+
+gg:
+  jte:
+    usePrecompiledTemplates: true
+    developmentMode: false

@@ -13,53 +13,61 @@
 </div>
 
 <div class="bg-gray-100 flex justify-center items-center min-h-screen">
-    <div class="bg-white p-6 rounded-lg shadow-md w-[800px]">
-        <!-- Tabs -->
-        <div class="flex space-x-4 border-b pb-2">
-            <button class="px-4 py-2 border rounded bg-green-100 text-green-700">🔗 Link</button>
-            <button class="px-4 py-2 border rounded">📄 Text</button>
-            <button class="px-4 py-2 border rounded">📧 E-mail</button>
-            <button class="px-4 py-2 border rounded">📞 Call</button>
-            <button class="px-4 py-2 border rounded">📩 SMS</button>
-        </div>
+    <div class="flex bg-white p-6 rounded-lg shadow-md w-[800px]">
 
-        <!-- Step 1: Complete Content -->
-        <div class="mt-4">
-            <h2 class="font-semibold">1. Complete the content</h2>
-            <input type="text" placeholder="https://" class="w-full p-2 border rounded mt-2">
-            <p class="text-red-500 text-sm mt-1">This field is required.</p>
-        </div>
-
-        <!-- Step 2: Design QR Code -->
-        <div class="mt-4">
-            <h2 class="font-semibold">2. Design your QR Code</h2>
-            <div class="flex space-x-2 mt-2">
-                <button class="p-2 border rounded bg-gray-300">🖼️ Frame</button>
-                <button class="p-2 border rounded">⬛ Shape</button>
-                <button class="p-2 border rounded">🏷️ Logo</button>
+        <div>
+            <!-- Tabs -->
+            <div class="flex space-x-4 border-b pb-2">
+                <button class="px-4 py-2 border rounded bg-green-100 text-green-700">🔗 Link</button>
+                <button class="px-4 py-2 border rounded">📄 Text</button>
+                <button class="px-4 py-2 border rounded">📧 E-mail</button>
+                <button class="px-4 py-2 border rounded">📞 Call</button>
+                <button class="px-4 py-2 border rounded">📩 SMS</button>
             </div>
 
-            <!-- Frame Options -->
-            <div class="flex space-x-2 mt-4">
-                <div class="w-12 h-12 bg-gray-200 border rounded flex items-center justify-center">X</div>
-                <div class="w-12 h-12 bg-gray-200 border rounded"></div>
-                <div class="w-12 h-12 bg-gray-200 border rounded"></div>
-                <div class="w-12 h-12 bg-gray-200 border rounded"></div>
+            <!-- Step 1: Complete Content -->
+            <div class="mt-4">
+                <h2 class="font-semibold">1. Complete the content</h2>
+                <input type="text" placeholder="https://" class="w-full p-2 border rounded mt-2" required >
+<!--                <p class="text-red-500 text-sm mt-1">This field is required.</p>-->
+            </div>
+
+            <!-- Step 2: Design QR Code -->
+            <div class="mt-4">
+                <h2 class="font-semibold">2. Design your QR Code</h2>
+                <div class="flex space-x-2 mt-2">
+                    <button class="p-2 border rounded bg-gray-300">🖼️ Frame</button>
+                    <button class="p-2 border rounded">⬛ Shape</button>
+                    <button class="p-2 border rounded">🏷️ Logo</button>
+                </div>
+
+                <!-- Frame Options -->
+                <div class="flex space-x-2 mt-4">
+                    <div class="w-12 h-12 bg-gray-200 border rounded flex items-center justify-center">X</div>
+                    <div class="w-12 h-12 bg-gray-200 border rounded"></div>
+                    <div class="w-12 h-12 bg-gray-200 border rounded"></div>
+                    <div class="w-12 h-12 bg-gray-200 border rounded"></div>
+                </div>
             </div>
         </div>
 
+        <div class="flex-1 flex pl-6 flex-col items-center justify-center">
+            <div class="w-full h-full bg-gray-300 flex items-center justify-center">
+                <p class="text-gray-500">[QR Code]</p>
+            </div>
 
-    </div>
-
-    <!-- Step 3: QR Code Preview & Download -->
-    <div class="mt-4 justify-between items-center">
-        <div class="w-32 h-32 bg-gray-300 flex items-center justify-center">
-            <p class="text-gray-500">[QR Code]</p>
+            <div class="mt-3 flex flex-col">
+                <button class="px-4 py-2 bg-gray-400 text-white rounded opacity-50 cursor-not-allowed">
+                    Generate QR Code
+                </button>
+                <button class="mt-2 px-4 py-2 bg-gray-400 text-white rounded opacity-50 cursor-not-allowed">
+                    ⬇ Download QR Code
+                </button>
+            </div>
         </div>
-        <button class="px-4 py-2 bg-gray-400 text-white rounded opacity-50 cursor-not-allowed">
-            ⬇ Download QR Code
-        </button>
     </div>
+
+
 </div>
 </body>
 </html>
