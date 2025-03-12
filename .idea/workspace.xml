@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8b67e908-bc4b-470a-928e-3a46081fc7f4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring-shell.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ts-downloader.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsdownloader-cli/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/tsdownloader-cli/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsdownloader-cli/src/main/kotlin/freeapp/me/tsdownloadercli/service/PlayWriterService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/tsdownloader-cli/src/main/kotlin/freeapp/me/tsdownloadercli/service/PlayWriterService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsdownloader-cli/src/main/kotlin/freeapp/me/tsdownloadercli/service/TSDownloaderService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/tsdownloader-cli/src/main/kotlin/freeapp/me/tsdownloadercli/service/TSDownloaderService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsdownloader-cli/src/main/kotlin/freeapp/me/tsdownloadercli/service/VideoDownloaderUtil.kt" beforeDir="false" afterPath="$PROJECT_DIR$/tsdownloader-cli/src/main/kotlin/freeapp/me/tsdownloadercli/service/VideoDownloaderUtil.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,47 +103,47 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Gradle.Build flyway-jooq.executor": "Run",
-    "Gradle.Build tsdownloader-cli.executor": "Run",
-    "Gradle.DownloaderTest.jsonParserTest.executor": "Run",
-    "Gradle.DownloaderTest.retrieveM3U8requestFilesTest.executor": "Run",
-    "Gradle.TodoDtoRepositoryTest.findByIdTest.executor": "Run",
-    "Gradle.TodoDtoRepositoryTest.findTodosByPageTest.executor": "Run",
-    "Gradle.TodoDtoRepositoryTest.test.executor": "Run",
-    "Gradle.TodoRepositoryTest.test.executor": "Run",
-    "Gradle.TsdownloaderCliApplicationTests.findMasterM3UTest.executor": "Run",
-    "Gradle.TsdownloaderCliApplicationTests.retrieveM3U8requestFilesTest.executor": "Run",
-    "Gradle.flyway-jooq [flywayRepair].executor": "Run",
-    "Gradle.flyway-jooq [generateTodoDBJooq].executor": "Run",
-    "Gradle.tsdownloader-cli [clean].executor": "Run",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "Spring Boot.FlywayJooqApplication-prod.executor": "Run",
-    "Spring Boot.FlywayJooqApplication.executor": "Run",
-    "Spring Boot.TsdownloaderCliApplication.executor": "Run",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "dart.analysis.tool.window.visible": "false",
-    "jdk.selected.JAVA_MODULE": "zulu-21",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/stella6767/IdeaProjects/scratcher",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "run.configurations.included.in.services": "true",
-    "settings.editor.selected.configurable": "vcs.Git",
-    "show.migrate.to.gradle.popup": "false",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.Build flyway-jooq.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Build tsdownloader-cli.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.DownloaderTest.jsonParserTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.DownloaderTest.retrieveM3U8requestFilesTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.TodoDtoRepositoryTest.findByIdTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.TodoDtoRepositoryTest.findTodosByPageTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.TodoDtoRepositoryTest.test.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.TodoRepositoryTest.test.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.TsdownloaderCliApplicationTests.findMasterM3UTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.TsdownloaderCliApplicationTests.retrieveM3U8requestFilesTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.flyway-jooq [flywayRepair].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.flyway-jooq [generateTodoDBJooq].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.tsdownloader-cli [clean].executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Spring Boot.FlywayJooqApplication-prod.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.FlywayJooqApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.TsdownloaderCliApplication.executor&quot;: &quot;Run&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;zulu-21&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/stella6767/IdeaProjects/scratcher&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;run.configurations.included.in.services&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;vcs.Git&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/tsdownloader-cli/src/main/kotlin/freeapp/me/tsdownloadercli/dto" />
@@ -368,6 +365,7 @@
       <updated>1740984138672</updated>
       <workItem from="1740984140046" duration="46947000" />
       <workItem from="1741320833877" duration="25000" />
+      <workItem from="1741786412573" duration="265000" />
     </task>
     <servers />
   </component>
