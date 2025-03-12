@@ -1,6 +1,12 @@
 package freeapp.me.qrgenerator.config
 
 
-data class QRReqDto(
-    val id:String,
+data class LinkReqDto(
+    val url:String,
+)
+
+data class VCardReqDto(
+    val firstName: String,
+    val lastName: String,
+    val phoneNumber:String,
 )
