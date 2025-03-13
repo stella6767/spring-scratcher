@@ -83,7 +83,6 @@ class QrService(
         val base64Image =
             Base64.getEncoder().encodeToString(outputStream.toByteArray())
 
-        //MatrixToImageWriter.writeToPath(bitMatrix, "PNG", Paths.get("./test.png"))
         return base64Image
     }
 

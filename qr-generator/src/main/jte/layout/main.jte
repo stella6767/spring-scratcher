@@ -16,6 +16,8 @@
 <body id="body" hx-indicator=".loading-bar">
 <div class="loading-bar"></div>
 
+<div id="error-alert-container"></div>
+
 ${content}
 
 </body>
