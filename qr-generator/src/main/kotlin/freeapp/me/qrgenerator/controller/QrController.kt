@@ -3,9 +3,6 @@ package freeapp.me.qrgenerator.controller
 import freeapp.me.qrgenerator.config.QrGeneratorType
 import freeapp.me.qrgenerator.service.QrService
 import io.github.wimdeblauwe.htmx.spring.boot.mvc.HxRequest
-import org.springframework.http.HttpHeaders
-import org.springframework.http.MediaType
-import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*

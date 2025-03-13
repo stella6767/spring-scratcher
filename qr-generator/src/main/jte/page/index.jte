@@ -18,7 +18,7 @@
                 </div>
                 <!-- Step 2: Design QR Code -->
                 <div class="mt-4">
-                    
+
                 </div>
             </div>
 

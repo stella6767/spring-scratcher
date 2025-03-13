@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <script src="https://unpkg.com/htmx.org@2.0.4"></script>
-<%--    <script defer src="/js/custom-htmx.js"></script>--%>
+    <script defer src="/custom.js"></script>
     <link href="/custom.css" rel="stylesheet">
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
     <meta charset="UTF-8">

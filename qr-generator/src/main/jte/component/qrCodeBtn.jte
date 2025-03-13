@@ -7,8 +7,10 @@
 
 
 
-<div id="qr-code-btn" class="mt-3 flex flex-col" hx-swap-oob="true">
-
+<div id="qr-code-btn" class="mt-3 flex flex-col"
+     hx-on--load="initInputField();"
+     hx-swap-oob="true"
+>
     @if(isGenerated)
         <button
                 id="qr-generate-btn"
