@@ -2,18 +2,14 @@ package freeapp.me.qrgenerator.service
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.google.zxing.BarcodeFormat
-import com.google.zxing.MultiFormatWriter
 import com.google.zxing.client.j2se.MatrixToImageWriter
 import com.google.zxing.qrcode.QRCodeWriter
-import freeapp.me.qrgenerator.config.LinkReqDto
-import freeapp.me.qrgenerator.config.QrGeneratorType
-import freeapp.me.qrgenerator.config.VCardReqDto
+import freeapp.me.qrgenerator.config.*
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
-import org.springframework.web.bind.annotation.RequestParam
-import java.io.File
-import java.nio.file.Paths
-import javax.imageio.ImageIO
+import java.io.ByteArrayOutputStream
+import java.util.*
+import kotlin.collections.HashMap
 
 
 @Service
@@ -27,17 +23,23 @@ class QrService(
     fun generateStaticQRCodeByType(
         type: QrGeneratorType,
         qrReqDto: HashMap<String, Any>
-    ) {
-        when (type) {
-            QrGeneratorType.LINK -> {
-                val linkReqDto =
-                    mapper.convertValue(qrReqDto, LinkReqDto::class.java)
-                generateStaticQRCode(linkReqDto.url)
+    ): String {
+        return when (type) {
+            QrGeneratorType.LINK, QrGeneratorType.TEXT -> {
+                val textReqDto =
+                    mapper.convertValue(qrReqDto, TextReqDto::class.java)
+                generateStaticQRCode(textReqDto.text)
             }
+            QrGeneratorType.SMS -> {
 
-            QrGeneratorType.TEXT -> TODO()
-            QrGeneratorType.SMS -> TODO()
-            QrGeneratorType.WIFI -> TODO()
+                TODO()
+            }
+            QrGeneratorType.WIFI -> {
+                val vCardDto =
+                    mapper.convertValue(qrReqDto, WifiReqDto::class.java)
+
+                TODO()
+            }
             QrGeneratorType.VCARD -> {
                 val vCardDto =
                     mapper.convertValue(qrReqDto, VCardReqDto::class.java)
@@ -45,32 +47,42 @@ class QrService(
                     BEGIN:VCARD
                     VERSION:3.0
                     FN:${vCardDto.firstName}  ${vCardDto.lastName}
-                    TEL:${vCardDto.phoneNumber}                   
+                    TEL;TYPE=CELL:${vCardDto.phoneNumber}                   
                     END:VCARD
                 """.trimIndent()
                 println(vCard)
                 generateStaticQRCode(vCard)
             }
-
-            QrGeneratorType.TEL -> TODO()
-            QrGeneratorType.TELEGRAM -> TODO()
+            QrGeneratorType.TEL -> {
+                val callDto =
+                    mapper.convertValue(qrReqDto, CallReqDto::class.java)
+                TODO()
+            }
         }
 
     }
 
 
     fun generateStaticQRCode(
-        text: String,
+        qrValue: String,
         width: Int = 300,
         height: Int = 300
-    ) {
+    ): String {
 
         val qrCodeWriter = QRCodeWriter()
-
         val bitMatrix =
-            qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, width, height)
+            qrCodeWriter.encode(qrValue, BarcodeFormat.QR_CODE, width, height)
 
-        MatrixToImageWriter.writeToPath(bitMatrix, "PNG", Paths.get("./test.png"))
+        val outputStream = ByteArrayOutputStream()
+
+        MatrixToImageWriter.writeToStream(bitMatrix, "PNG", outputStream)
+
+        val base64Image =
+            Base64.getEncoder().encodeToString(outputStream.toByteArray())
+
+        //MatrixToImageWriter.writeToPath(bitMatrix, "PNG", Paths.get("./test.png"))
+        return base64Image
     }
+
 
 }

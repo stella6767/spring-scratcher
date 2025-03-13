@@ -3,10 +3,8 @@
 
 <div id="main-input-form">
     @if(type == QrGeneratorType.LINK)
-
         <h2 class="font-semibold">1. Complete the content</h2>
-        <input id="value" name="url" type="text" placeholder="https://" class="w-full p-2 border rounded mt-2" required>
-
+        <input id="value" name="text" type="text" placeholder="https://" class="w-full p-2 border rounded mt-2" required>
     @elseif(type == QrGeneratorType.VCARD)
         <h2 class="font-semibold">1. Complete the content</h2>
         <div class="flex">

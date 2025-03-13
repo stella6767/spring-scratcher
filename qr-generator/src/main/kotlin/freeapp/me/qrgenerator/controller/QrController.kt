@@ -1,11 +1,11 @@
 package freeapp.me.qrgenerator.controller
 
-import com.fasterxml.jackson.databind.ObjectMapper
-import freeapp.me.qrgenerator.config.LinkReqDto
-
 import freeapp.me.qrgenerator.config.QrGeneratorType
 import freeapp.me.qrgenerator.service.QrService
 import io.github.wimdeblauwe.htmx.spring.boot.mvc.HxRequest
+import org.springframework.http.HttpHeaders
+import org.springframework.http.MediaType
+import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
@@ -26,7 +26,8 @@ class QrController(
         return "page/index"
     }
 
-    //todo converter && exception handling
+    //todo converter && exception handling & dynamic with s3
+    //
 
     @HxRequest
     @GetMapping("/qr/{type}")
@@ -46,15 +47,22 @@ class QrController(
 
     @HxRequest
     @PostMapping("/qrcode")
-    @ResponseBody
     fun qrcode(
+        model: Model,
         @RequestParam type: QrGeneratorType,
         @RequestParam qrReqDto: HashMap<String, Any>
-    ) {
+    ): FragmentsRendering {
 
-        println(qrReqDto)
+        val qrCode =
+            qrService.generateStaticQRCodeByType(type, qrReqDto)
 
-        qrService.generateStaticQRCodeByType(type, qrReqDto)
+        model.addAttribute("imageData", qrCode)
+        model.addAttribute("isGenerated", true)
+
+        return FragmentsRendering
+            .with("component/qrImg")
+            .fragment("component/qrCodeBtn")
+            .build()
     }
 
 

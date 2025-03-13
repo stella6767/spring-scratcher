@@ -1,5 +1,7 @@
 package freeapp.me.qrgenerator.config
 
+//https://emojipedia.org/
+
 enum class QrGeneratorType(
     val icon: String,
     val fieldName: String,
@@ -10,6 +12,7 @@ enum class QrGeneratorType(
     SMS("\uD83D\uDCE7", "SmS"),
     WIFI("\uD83D\uDCDE", "Wifi"),
     VCARD("\uD83D\uDCE9", "V-Card"),
-    TEL("", "Tel"),
-    TELEGRAM("", "Telegram"),
+    TEL("\uD83D\uDEDC", "Tel"),
 }
+
+

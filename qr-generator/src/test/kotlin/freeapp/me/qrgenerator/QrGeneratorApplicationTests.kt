@@ -13,7 +13,7 @@ class QrGeneratorApplicationTests {
     fun contextLoads() {
 
         val generateQRCode =
-            qrService.generateStaticQRCode(text = "https://www.freeapp.me/")
+            qrService.generateStaticQRCode(qrValue = "https://www.freeapp.me/")
 
         println(generateQRCode)
 
