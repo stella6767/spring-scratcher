@@ -1,3 +1,5 @@
+import groovy.lang.Closure
+import io.swagger.v3.oas.models.servers.Server
 import org.hidetake.gradle.swagger.generator.GenerateSwaggerUI
 
 plugins {
@@ -6,7 +8,7 @@ plugins {
     id("org.springframework.boot") version "3.4.5"
     id("io.spring.dependency-management") version "1.1.7"
     id("org.asciidoctor.jvm.convert") version "3.3.2"
-    id("com.epages.restdocs-api-spec") version "0.19.0"
+    id("com.epages.restdocs-api-spec") version "0.19.4"
     id("org.hidetake.swagger.generator") version "2.19.2"
 
 
@@ -30,7 +32,19 @@ extra["snippetsDir"] = file("build/generated-snippets")
 
 
 openapi3 {
-    setServer("http://localhost:8080")
+
+    val local = closureOf<Server> {
+        url("http://localhost:8080")
+        description("Local Development Server")
+    } as Closure<Server>
+
+    val dev = closureOf<Server> {
+        url("https://b2b.freeapp.me")
+        description("dev Development Server")
+    } as Closure<Server>
+
+    setServers(listOf(local, dev))
+
     title = "API 문서"
     description = "RestDocsWithSwagger Docs"
     version = "0.0.1"
@@ -88,11 +102,11 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
     testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
     testImplementation("org.springframework.security:spring-security-test")
-    testImplementation("com.epages:restdocs-api-spec-mockmvc:0.19.0")
+    testImplementation("com.epages:restdocs-api-spec-mockmvc:0.19.4")
     testImplementation("org.instancio:instancio-junit:5.4.1")
 
     // Swagger UI
-    swaggerUI ("org.webjars:swagger-ui:5.21.0")
+    swaggerUI("org.webjars:swagger-ui:5.21.0")
 
 
 
@@ -136,24 +150,24 @@ tasks.withType<GenerateSwaggerUI> {
 
     inputFile = layout.buildDirectory.file("api-spec/openapi3.yaml").get().asFile
 
-    doFirst {
-
-        val securitySchemesContent = """
-            |  securitySchemes:
-            |    APIKey:
-            |      type: apiKey
-            |      name: Authorization
-            |      in: header
-            |security:
-            |  - APIKey: []  # Apply the security scheme here
-        """.trimMargin()
-
-        if (inputFile.exists()) {
-            inputFile.appendText(securitySchemesContent)
-        } else {
-            throw GradleException("Input file ${inputFile.absolutePath} does not exist.")
-        }
-    }
+//    doFirst {
+//
+//        val securitySchemesContent = """
+//            |  securitySchemes:
+//            |    APIKey:
+//            |      type: apiKey
+//            |      name: Authorization
+//            |      in: header
+//            |security:
+//            |  - APIKey: []  # Apply the security scheme here
+//        """.trimMargin()
+//
+//        if (inputFile.exists()) {
+//            inputFile.appendText(securitySchemesContent)
+//        } else {
+//            throw GradleException("Input file ${inputFile.absolutePath} does not exist.")
+//        }
+//    }
 }
 
 

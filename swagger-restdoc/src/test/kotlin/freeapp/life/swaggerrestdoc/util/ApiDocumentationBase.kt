@@ -1,8 +1,12 @@
 package freeapp.life.swaggerrestdoc.util
 
 import com.epages.restdocs.apispec.MockMvcRestDocumentationWrapper
+import com.epages.restdocs.apispec.MockMvcRestDocumentationWrapper.document
+import com.epages.restdocs.apispec.ParameterDescriptorWithType
+import com.epages.restdocs.apispec.ResourceDocumentation.parameterWithName
 import com.epages.restdocs.apispec.ResourceDocumentation.resource
 import com.epages.restdocs.apispec.ResourceSnippetParameters
+import com.epages.restdocs.apispec.Schema
 import com.fasterxml.jackson.databind.ObjectMapper
 import freeapp.life.swaggerrestdoc.config.security.JwtTokenProvider
 import freeapp.life.swaggerrestdoc.config.security.UserPrincipal
@@ -20,15 +24,20 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.context.annotation.Import
 import org.springframework.restdocs.RestDocumentationContextProvider
 import org.springframework.restdocs.RestDocumentationExtension
+import org.springframework.restdocs.headers.HeaderDescriptor
 import org.springframework.restdocs.headers.HeaderDocumentation
+import org.springframework.restdocs.hypermedia.LinkDescriptor
 import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation
 import org.springframework.restdocs.mockmvc.RestDocumentationResultHandler
 import org.springframework.restdocs.operation.preprocess.OperationRequestPreprocessor
 import org.springframework.restdocs.operation.preprocess.Preprocessors
+import org.springframework.restdocs.operation.preprocess.Preprocessors.*
 import org.springframework.restdocs.payload.FieldDescriptor
 import org.springframework.restdocs.payload.PayloadDocumentation
 import org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath
 import org.springframework.restdocs.payload.PayloadDocumentation.subsectionWithPath
+import org.springframework.restdocs.request.ParameterDescriptor
+import org.springframework.restdocs.snippet.Attributes.key
 import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers
 import org.springframework.test.context.bean.override.mockito.MockitoBean
 import org.springframework.test.context.junit.jupiter.SpringExtension
@@ -73,7 +82,7 @@ open class ApiDocumentationBase {
     protected lateinit var jwtTokenProvider: JwtTokenProvider
 
 
-    protected fun makeClaim(): Map<String, String> {
+    private fun makeClaim(): Map<String, String> {
         return mapOf(
             "userId" to "1",
             "username" to "test",
@@ -86,9 +95,8 @@ open class ApiDocumentationBase {
 
     val fakePrincipal = UserPrincipal(makeClaim())
 
-    protected val writer = write()
 
-    private fun write(): RestDocumentationResultHandler {
+    protected fun write(vararg parameters: ParameterDescriptor): RestDocumentationResultHandler {
         return MockMvcRestDocumentationWrapper.document(
             "{class-name}/{method-name}",
             getDocumentRequest(),
@@ -96,6 +104,11 @@ open class ApiDocumentationBase {
             // 아래에 resource 스니펫 추가
             resource(
                 ResourceSnippetParameters.builder()
+                    .queryParameters(*parameters)
+//                    .queryParameters(
+//                        RequestDocumentation.parameterWithName("page").description("페이지 번호 (0부터 시작)").optional(),
+//                        RequestDocumentation.parameterWithName("size").description("페이지 크기").optional()
+//                    )
                     .description("B2B API") // 각 API에 맞게 설명 추가
                     .build()
             )
@@ -113,6 +126,61 @@ open class ApiDocumentationBase {
         )
     }
 
+    protected fun documentApi(
+        identifier: String,
+        tag: String,
+        summary: String,
+        queryParams: Array<ParameterDescriptorWithType> = emptyArray(),
+        requestFields: Array<FieldDescriptor> = emptyArray(),
+        responseFields: Array<FieldDescriptor> = emptyArray(),
+        links: Array<LinkDescriptor> = emptyArray(),
+        requestSchema: Schema? = null,
+        responseSchema: Schema? = null,
+        pathParams: Array<ParameterDescriptor> = emptyArray(),
+        requestHeaders: Array<HeaderDescriptor> = emptyArray(),
+        //pathParams: PathParametersSnippet
+
+    ): RestDocumentationResultHandler {
+        return document(
+            identifier,
+            preprocessRequest(prettyPrint()),
+            preprocessResponse(prettyPrint()),
+            resource(
+                ResourceSnippetParameters.builder()
+                    .tag(tag)
+                    .summary(summary)
+                    .apply {
+                        if (queryParams.isNotEmpty()) {
+                            queryParameters(*queryParams)
+                        }
+                        if (requestFields.isNotEmpty()) {
+                            requestFields(*requestFields)
+                        }
+                        if (responseFields.isNotEmpty()) {
+                            responseFields(*responseFields)
+                        }
+                        if (pathParams.isNotEmpty()) {
+                            pathParameters(*pathParams)
+                        }
+                        if (requestHeaders.isNotEmpty()) {
+                            requestHeaders(*requestHeaders)
+                        }
+                        if (links.isNotEmpty()) {
+                            links(*links)
+                        }
+                        if (requestSchema != null) {
+                            requestSchema(requestSchema)
+                        }
+                        if (responseSchema != null) {
+                            responseSchema(responseSchema)
+                        }
+                    }
+                    .build()
+            )
+        )
+    }
+
+
     @BeforeEach
     fun setUp(
         webApplicationContext: WebApplicationContext,
@@ -128,11 +196,11 @@ open class ApiDocumentationBase {
             )
             .apply<DefaultMockMvcBuilder>(springSecurity)
             .alwaysDo<DefaultMockMvcBuilder>(MockMvcResultHandlers.print())
-            .alwaysDo<DefaultMockMvcBuilder>(writer)
+            //.alwaysDo<DefaultMockMvcBuilder>(write())
             .build()
     }
 
-    protected fun authorizationHeader() =
+    protected fun authorizationHeader(): HeaderDescriptor =
         HeaderDocumentation.headerWithName("Authorization").description("Bearer 인증 토큰")
 
     protected fun commonResponseFields() = arrayOf(
@@ -140,6 +208,58 @@ open class ApiDocumentationBase {
         PayloadDocumentation.subsectionWithPath("data").description("응답 데이터")
     )
 
+
+    protected fun getPageableResponseFields(
+        prefix: String = "data",
+        contentType: String = "Todo"
+    ): Array<FieldDescriptor> {
+        return arrayOf(
+
+            fieldWithPath("$prefix.pageable").description("페이지 정보"),
+            fieldWithPath("$prefix.pageable.pageNumber").description("현재 페이지 번호"),
+            fieldWithPath("$prefix.pageable.pageSize").description("페이지 크기"),
+            fieldWithPath("$prefix.pageable.sort").description("정렬 정보"),
+            fieldWithPath("$prefix.pageable.offset").description("오프셋"),
+            fieldWithPath("$prefix.pageable.paged").description("페이징 사용 여부"),
+            fieldWithPath("$prefix.pageable.unpaged").description("페이징 미사용 여부"),
+            fieldWithPath("$prefix.totalElements").description("전체 요소 수"),
+            fieldWithPath("$prefix.totalPages").description("전체 페이지 수"),
+            fieldWithPath("$prefix.last").description("마지막 페이지 여부"),
+            fieldWithPath("$prefix.size").description("페이지 크기"),
+            fieldWithPath("$prefix.number").description("현재 페이지 번호"),
+            fieldWithPath("$prefix.sort").description("정렬 정보"),
+            fieldWithPath("$prefix.sort.empty").description("정렬 정보 존재 여부"),
+            fieldWithPath("$prefix.sort.sorted").description("정렬됨 여부"),
+            fieldWithPath("$prefix.sort.unsorted").description("정렬 안됨 여부"),
+            fieldWithPath("$prefix.numberOfElements").description("현재 페이지의 요소 수"),
+            fieldWithPath("$prefix.first").description("첫 페이지 여부"),
+            fieldWithPath("$prefix.empty").description("결과 비어있음 여부")
+        )
+    }
+
+//    /**
+//     * 필드 EnumType description 확장함수 (ENUM 내부 name, label DisplayPropertyEnum 활용 )
+//     */
+//    fun <T : DisplayPropertyEnum> FieldDescriptor.enumTypeAndLabel(enums: List<T>) = apply {
+//        type("ENUM")
+//        attributes(key("enumValues").value(enums.map { "${it.name}: ${it.label}" }))
+//    }
+    /**
+     * 필드 ArrayType description 확장함수(ARRAY 내부 Element Number 지정 확장 함수)
+     */
+
+    fun FieldDescriptor.itemsTypeForNumberArray() = apply {
+        type("ARRAY")
+        attributes(key("itemsType").value("Number"))
+    }
+
+
+    protected fun getPageableParameters(): Array<ParameterDescriptorWithType> {
+        return arrayOf(
+            parameterWithName("page").description("페이지 번호 (0부터 시작)").optional(),
+            parameterWithName("size").description("페이지 크기").optional()
+        )
+    }
 
     protected fun <T : Enum<T>> getEnumValues(enumType: Class<T>): String {
         return Arrays.stream(enumType.enumConstants)

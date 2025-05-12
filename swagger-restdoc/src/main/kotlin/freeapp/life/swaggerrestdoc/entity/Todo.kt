@@ -1,5 +1,6 @@
 package freeapp.life.swaggerrestdoc.entity
 
+import com.fasterxml.jackson.annotation.JsonValue
 import jakarta.persistence.*
 
 @Entity
@@ -35,6 +36,7 @@ class Todo(
 
 
     enum class Status(
+        @JsonValue
         val value: String
     ) {
         URGENT("긴급"),

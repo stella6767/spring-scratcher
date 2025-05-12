@@ -8,19 +8,15 @@ import freeapp.life.swaggerrestdoc.web.dto.TodoUpdateDto
 import org.instancio.Instancio
 import org.junit.jupiter.api.Test
 
-import org.junit.jupiter.api.Assertions.*
 import org.mockito.Mockito
 import org.springframework.data.domain.PageImpl
 import org.springframework.data.domain.PageRequest
-import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType
-import org.springframework.restdocs.headers.HeaderDocumentation.headerWithName
-import org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders
 import org.springframework.restdocs.payload.PayloadDocumentation.*
 import org.springframework.restdocs.request.RequestDocumentation.*
-import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
+
 
 class TodoControllerTest : ApiDocumentationBase() {
 
@@ -61,13 +57,14 @@ class TodoControllerTest : ApiDocumentationBase() {
         )
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andDo(
-                writer.document(
-                    queryParameters(
-                        parameterWithName("page").description("페이지 번호 (0부터 시작)").optional(),
-                        parameterWithName("size").description("페이지 크기").optional()
-                    ),
-                    responseFields(
+                documentApi(
+                    identifier = "todo-list",
+                    tag = "Todo API",
+                    summary = "Todo 목록 조회 API",
+                    queryParams = getPageableParameters(),
+                    responseFields = arrayOf(
                         *commonResponseFields(),
+                        *getPageableResponseFields(),
                         fieldWithPath("data.content[]").description("Todo 목록"),
                         fieldWithPath("data.content[].id").description("Todo ID"),
                         fieldWithPath("data.content[].content").description("Todo 내용"),
@@ -75,30 +72,12 @@ class TodoControllerTest : ApiDocumentationBase() {
                         fieldWithPath("data.content[].isFinish").description("완료 여부"),
                         fieldWithPath("data.content[].createdAt").description("생성일"),
                         fieldWithPath("data.content[].updatedAt").description("최종 수정일"),
-                        fieldWithPath("data.pageable").description("페이지 정보"),
-                        fieldWithPath("data.pageable.pageNumber").description("현재 페이지 번호"),
-                        fieldWithPath("data.pageable.pageSize").description("페이지 크기"),
-                        fieldWithPath("data.pageable.sort").description("정렬 정보"),
-                        fieldWithPath("data.pageable.offset").description("오프셋"),
-                        fieldWithPath("data.pageable.paged").description("페이징 사용 여부"),
-                        fieldWithPath("data.pageable.unpaged").description("페이징 미사용 여부"),
-                        fieldWithPath("data.totalElements").description("전체 요소 수"),
-                        fieldWithPath("data.totalPages").description("전체 페이지 수"),
-                        fieldWithPath("data.last").description("마지막 페이지 여부"),
-                        fieldWithPath("data.size").description("페이지 크기"),
-                        fieldWithPath("data.number").description("현재 페이지 번호"),
-                        fieldWithPath("data.sort").description("정렬 정보"),
-                        fieldWithPath("data.sort.empty").description("정렬 정보 존재 여부"),
-                        fieldWithPath("data.sort.sorted").description("정렬됨 여부"),
-                        fieldWithPath("data.sort.unsorted").description("정렬 안됨 여부"),
-                        fieldWithPath("data.numberOfElements").description("현재 페이지의 요소 수"),
-                        fieldWithPath("data.first").description("첫 페이지 여부"),
-                        fieldWithPath("data.empty").description("결과 비어있음 여부")
                     ),
+
                 )
             )
-
     }
+
 
     @Test
     fun findTodoById() {
@@ -121,11 +100,11 @@ class TodoControllerTest : ApiDocumentationBase() {
         )
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andDo(
-                writer.document(
-                    pathParameters(
-                        parameterWithName("id").description("Todo ID")
-                    ),
-                    responseFields(
+                documentApi(
+                    identifier = "todo-find-by-id",
+                    tag = "Todo API",
+                    summary = "Todo 상세 조회 API",
+                    responseFields = arrayOf(
                         *commonResponseFields(),
                         fieldWithPath("data.id").description("Todo ID"),
                         fieldWithPath("data.content").description("Todo 내용"),
@@ -133,7 +112,11 @@ class TodoControllerTest : ApiDocumentationBase() {
                         fieldWithPath("data.isFinish").description("완료 여부"),
                         fieldWithPath("data.createdAt").description("생성일"),
                         fieldWithPath("data.updatedAt").description("최종 수정일")
-                    )
+                    ),
+                    pathParams = arrayOf(
+                        parameterWithName("id").description("Todo ID")
+                    ),
+
                 )
             )
     }
@@ -141,8 +124,7 @@ class TodoControllerTest : ApiDocumentationBase() {
     @Test
     fun updateTodo() {
         // Given
-        val id = 1L
-        val uri = "/todo/{id}"
+        val uri = "/todo"
 
         val updateDto = Instancio.of(TodoUpdateDto::class.java)
             .create()
@@ -159,24 +141,24 @@ class TodoControllerTest : ApiDocumentationBase() {
 
         // When & Then
         this.mockMvc.perform(
-            RestDocumentationRequestBuilders.put(uri, id)
+            RestDocumentationRequestBuilders.put(uri)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(content)
                 .accept(MediaType.ALL)
         )
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andDo(
-                writer.document(
-                    pathParameters(
-                        parameterWithName("id").description("Todo ID")
-                    ),
-                    requestFields(
+                documentApi(
+                    identifier = "update todo",
+                    tag = "Todo API",
+                    summary = "Todo update API",
+                    requestFields = arrayOf(
                         fieldWithPath("id").description("Todo ID"),
                         fieldWithPath("content").description("수정할 Todo 내용"),
                         fieldWithPath("status").description("수정할 Todo 상태"),
                         fieldWithPath("isFinish").description("완료 여부")
                     ),
-                    responseFields(
+                    responseFields = arrayOf(
                         *commonResponseFields(),
                         fieldWithPath("data.id").description("Todo ID"),
                         fieldWithPath("data.content").description("Todo 내용"),
@@ -184,7 +166,9 @@ class TodoControllerTest : ApiDocumentationBase() {
                         fieldWithPath("data.isFinish").description("완료 여부"),
                         fieldWithPath("data.createdAt").description("생성일"),
                         fieldWithPath("data.updatedAt").description("최종 수정일")
-                    )
+                    ),
+
+
                 )
             )
     }
@@ -193,7 +177,7 @@ class TodoControllerTest : ApiDocumentationBase() {
     fun deleteTodoById() {
         // Given
         val id = 1L
-        val uri = "/todo/todo/{id}"
+        val uri = "/todo/{id}"
 
         Mockito.doNothing().`when`(todoService).deleteTodoById(id)
 
@@ -205,13 +189,17 @@ class TodoControllerTest : ApiDocumentationBase() {
         )
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andDo(
-                writer.document(
-                    pathParameters(
-                        parameterWithName("id").description("삭제할 Todo ID")
+                documentApi(
+                    identifier = "delete-todo-by-id",
+                    tag = "Todo API",
+                    summary = "Todo 삭제 API",
+                    responseFields = arrayOf(
+                        *commonResponseFields(),
                     ),
-                    responseFields(
-                        *commonResponseFields()
-                    )
+                    pathParams = arrayOf(
+                        parameterWithName("id").description("Todo ID")
+                    ),
+
                 )
             )
     }
@@ -219,7 +207,7 @@ class TodoControllerTest : ApiDocumentationBase() {
     @Test
     fun saveTodo() {
         // Given
-        val uri = "/todo/todo"
+        val uri = "/todo"
 
         val saveDto = Instancio.of(TodoSaveDto::class.java)
             .create()
@@ -244,21 +232,27 @@ class TodoControllerTest : ApiDocumentationBase() {
         )
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andDo(
-                writer.document(
-                    requestFields(
+                documentApi(
+                    identifier = "todo-save",
+                    tag = "Todo API",
+                    summary = "Todo 생성 API",
+                    requestFields = arrayOf(
                         fieldWithPath("content").description("Todo 내용"),
                         fieldWithPath("status").description("Todo 상태")
                     ),
-                    responseFields(
+                    responseFields = arrayOf(
                         *commonResponseFields(),
-                        fieldWithPath("data.id").description("생성된 Todo ID"),
+                        fieldWithPath("data.id").description("Todo ID"),
                         fieldWithPath("data.content").description("Todo 내용"),
                         fieldWithPath("data.status").description("Todo 상태"),
                         fieldWithPath("data.isFinish").description("완료 여부"),
                         fieldWithPath("data.createdAt").description("생성일"),
                         fieldWithPath("data.updatedAt").description("최종 수정일")
+                    ),
+
+
                     )
-                )
+
             )
     }
 }

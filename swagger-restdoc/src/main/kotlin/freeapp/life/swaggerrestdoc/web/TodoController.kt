@@ -42,7 +42,7 @@ class TodoController(
     }
 
 
-    @PutMapping("/{id}")
+    @PutMapping("")
     fun updateTodo(
         @RequestBody updateDto: TodoUpdateDto
     ): SuccessResponse<TodoResponseDto> {
@@ -57,7 +57,7 @@ class TodoController(
     }
 
 
-    @DeleteMapping("/todo/{id}")
+    @DeleteMapping("/{id}")
     fun deleteTodoById(@PathVariable id: Long): SuccessResponse<Unit> {
 
         return SuccessResponse(
@@ -66,7 +66,7 @@ class TodoController(
         )
     }
 
-    @PostMapping("/todo")
+    @PostMapping("")
     fun saveTodo(
         @RequestBody saveDto: TodoSaveDto
     ): SuccessResponse<TodoResponseDto> {

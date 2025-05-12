@@ -27,6 +27,7 @@ data class UserResponseDto(
     val role: User.Role,
     @field:NotBlank(message = "email is required")
     val email: String,
+    val username: String,
     val createdAt: String,
     val updatedAt: String,
 ) {
@@ -38,6 +39,7 @@ data class UserResponseDto(
                 id = user.id,
                 role = user.role,
                 email = user.email,
+                username = user.username,
                 createdAt = user.createdAt.toStringByFormat(),
                 updatedAt = user.updatedAt.toStringByFormat()
             )

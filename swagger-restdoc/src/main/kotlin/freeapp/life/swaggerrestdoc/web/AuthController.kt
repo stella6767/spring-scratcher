@@ -2,9 +2,7 @@ package freeapp.life.swaggerrestdoc.web
 
 import freeapp.life.swaggerrestdoc.config.security.UserPrincipal
 import freeapp.life.swaggerrestdoc.service.AuthService
-import freeapp.life.swaggerrestdoc.web.dto.LoginReqDto
-import freeapp.life.swaggerrestdoc.web.dto.SuccessResponse
-import freeapp.life.swaggerrestdoc.web.dto.TokenDto
+import freeapp.life.swaggerrestdoc.web.dto.*
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.*
@@ -37,6 +35,21 @@ class AuthController(
         )
     }
 
+
+    @PatchMapping("/validate/password")
+    fun validatePassword(
+        @AuthenticationPrincipal principal: UserPrincipal,
+        @RequestBody passwordReqDto: PasswordReqDto,
+    ): SuccessResponse<UserResponseDto> {
+
+        val profile =
+            authService.validatePassword(principal, passwordReqDto)
+
+        return SuccessResponse(
+            "validatePassword",
+            profile
+        )
+    }
 
 
 }
