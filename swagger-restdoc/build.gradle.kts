@@ -1,9 +1,15 @@
+import org.hidetake.gradle.swagger.generator.GenerateSwaggerUI
+
 plugins {
     kotlin("jvm") version "1.9.25"
     kotlin("plugin.spring") version "1.9.25"
     id("org.springframework.boot") version "3.4.5"
     id("io.spring.dependency-management") version "1.1.7"
     id("org.asciidoctor.jvm.convert") version "3.3.2"
+    id("com.epages.restdocs-api-spec") version "0.19.0"
+    id("org.hidetake.swagger.generator") version "2.19.2"
+
+
     kotlin("plugin.jpa") version "1.9.25"
 }
 
@@ -21,6 +27,25 @@ repositories {
 }
 
 extra["snippetsDir"] = file("build/generated-snippets")
+
+
+openapi3 {
+    setServer("http://localhost:8080")
+    title = "API 문서"
+    description = "RestDocsWithSwagger Docs"
+    version = "0.0.1"
+    format = "yaml"
+    //outputDirectory = "build/resources/main/static/docs"
+}
+
+swaggerSources {
+    create("api") {
+        setInputFile(layout.buildDirectory.file("api-spec/openapi3.yaml").get().asFile)
+    }
+}
+
+
+
 
 dependencies {
 
@@ -63,6 +88,11 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
     testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
     testImplementation("org.springframework.security:spring-security-test")
+    testImplementation("com.epages:restdocs-api-spec-mockmvc:0.19.0")
+
+
+    // Swagger UI
+    swaggerUI ("org.webjars:swagger-ui:5.21.0")
 
 
 
@@ -92,4 +122,48 @@ tasks.test {
 tasks.asciidoctor {
     inputs.dir(project.extra["snippetsDir"]!!)
     dependsOn(tasks.test)
+}
+
+tasks.bootJar {
+    dependsOn(tasks.getByName("generateSwaggerUIApi"))
+    from("${tasks.getByName<GenerateSwaggerUI>("generateSwaggerUIApi").outputDir}") {
+        into("static/docs/")
+    }
+}
+
+tasks.withType<GenerateSwaggerUI> {
+    dependsOn("openapi3")
+
+    inputFile = layout.buildDirectory.file("api-spec/openapi3.yaml").get().asFile
+
+    doFirst {
+
+        val securitySchemesContent = """
+            |  securitySchemes:
+            |    APIKey:
+            |      type: apiKey
+            |      name: Authorization
+            |      in: header
+            |security:
+            |  - APIKey: []  # Apply the security scheme here
+        """.trimMargin()
+
+        if (inputFile.exists()) {
+            inputFile.appendText(securitySchemesContent)
+        } else {
+            throw GradleException("Input file ${inputFile.absolutePath} does not exist.")
+        }
+    }
+}
+
+
+
+tasks.register<Copy>("swaggerLocalCopy") {
+    dependsOn("generateSwaggerUIApi")
+
+    val sourcePath =
+        "${tasks.getByName<GenerateSwaggerUI>("generateSwaggerUIApi").outputDir}"
+
+    from(sourcePath)
+    into(layout.projectDirectory.dir("src/main/resources/static/docs/"))
 }

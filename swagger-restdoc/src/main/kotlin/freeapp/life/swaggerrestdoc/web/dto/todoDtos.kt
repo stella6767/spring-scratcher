@@ -3,8 +3,10 @@ package freeapp.life.swaggerrestdoc.web.dto
 import freeapp.life.swaggerrestdoc.entity.Todo
 import freeapp.life.swaggerrestdoc.entity.User
 import freeapp.life.swaggerrestdoc.util.toStringByFormat
+import jakarta.validation.constraints.NotBlank
 
 data class TodoSaveDto(
+    @field:NotBlank(message = "content is required")
     val content: String,
     val status: Todo.Status,
 ){
@@ -20,7 +22,9 @@ data class TodoSaveDto(
 
 data class TodoUpdateDto(
     val id: Long,
+    @field:NotBlank(message = "content is required")
     val content: String,
+    @field:NotBlank(message = "status is required")
     val status: Todo.Status,
     val isFinish: Boolean,
 )
