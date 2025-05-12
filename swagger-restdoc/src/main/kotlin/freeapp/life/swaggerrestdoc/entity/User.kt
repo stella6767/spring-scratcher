@@ -15,7 +15,7 @@ class User(
     @Column(nullable = false)
     val username = username
 
-    @Column(nullable = true, length = 100)
+    @Column(nullable = false, length = 100)
     val email = email
 
     @Column(nullable = false, length = 100)

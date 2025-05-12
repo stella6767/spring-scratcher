@@ -2,7 +2,8 @@ package freeapp.life.swaggerrestdoc.exception
 
 
 
-import org.hibernate.exception.ConstraintViolationException
+
+import jakarta.validation.ConstraintViolationException
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.http.ProblemDetail
@@ -70,34 +71,34 @@ class GlobalExceptionHandler : ResponseEntityExceptionHandler() {
 
 
 
-//    // ConstraintViolationException 처리 (Bean Validation)
-//    @ExceptionHandler(ConstraintViolationException::class)
-//    fun handleConstraintViolationException(ex: ConstraintViolationException, request: WebRequest): ProblemDetail {
-//
-//        log.error(ex.message, ex)
-//
-//        val message = ex.constraintViolations
-//            .stream()
-//            .map { violation -> "${violation.propertyPath}: ${violation.message}" }
-//            .collect(Collectors.joining(", "))
-//
-//        val problemDetail = createProblemDetail(
-//            ex,
-//            HttpStatus.BAD_REQUEST,
-//            "Validation Error",
-//            "Validation failed: $message",
-//            "https://api.example.com/problems/validation-error",
-//        )
-//
-//        // 추가 필드로 검증 오류 상세 정보 포함
-//        val errors = ex.constraintViolations.associate {
-//            it.propertyPath.toString() to it.message
-//        }
-//
-//        problemDetail.setProperty("errors", errors)
-//
-//        return problemDetail
-//    }
+    // ConstraintViolationException 처리 (Bean Validation)
+    @ExceptionHandler(ConstraintViolationException::class)
+    fun handleConstraintViolationException(ex: ConstraintViolationException, request: WebRequest): ProblemDetail {
+
+        log.error(ex.message, ex)
+
+        val message = ex.constraintViolations
+            .stream()
+            .map { violation -> "${violation.propertyPath}: ${violation.message}" }
+            .collect(Collectors.joining(", "))
+
+        val problemDetail = createProblemDetail(
+            ex,
+            HttpStatus.BAD_REQUEST,
+            "Validation Error",
+            "Validation failed: $message",
+            "https://api.example.com/problems/validation-error",
+        )
+
+        // 추가 필드로 검증 오류 상세 정보 포함
+        val errors = ex.constraintViolations.associate {
+            it.propertyPath.toString() to it.message
+        }
+
+        problemDetail.setProperty("errors", errors)
+
+        return problemDetail
+    }
 
 
 

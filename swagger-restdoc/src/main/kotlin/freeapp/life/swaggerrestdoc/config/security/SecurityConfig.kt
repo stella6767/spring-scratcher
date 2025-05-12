@@ -109,8 +109,8 @@ class SecurityConfig(
         http
             .authorizeHttpRequests { authorizeHttpRequests ->
                 authorizeHttpRequests
-                    .requestMatchers(*arrayOf("/auth/login", "/docs/**", "/todo/**")).permitAll()
-                    .requestMatchers("/auth/**").hasAnyRole(User.Role.ADMIN.name)
+                    .requestMatchers(*arrayOf("/auth/login", "/auth/register", "/docs/**", "/todo/**")).permitAll()
+                    //.requestMatchers("/auth/**").hasAnyRole(User.Role.ADMIN.name)
                     .anyRequest().authenticated()
             }
             .logout {

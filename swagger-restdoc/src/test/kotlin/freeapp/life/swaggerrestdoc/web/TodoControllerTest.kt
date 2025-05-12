@@ -1,6 +1,7 @@
 package freeapp.life.swaggerrestdoc.web
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import freeapp.life.swaggerrestdoc.entity.Todo
 import freeapp.life.swaggerrestdoc.util.ApiDocumentationBase
 import freeapp.life.swaggerrestdoc.web.dto.TodoResponseDto
 import freeapp.life.swaggerrestdoc.web.dto.TodoSaveDto
@@ -74,7 +75,7 @@ class TodoControllerTest : ApiDocumentationBase() {
                         fieldWithPath("data.content[].updatedAt").description("최종 수정일"),
                     ),
 
-                )
+                    )
             )
     }
 
@@ -117,7 +118,7 @@ class TodoControllerTest : ApiDocumentationBase() {
                         parameterWithName("id").description("Todo ID")
                     ),
 
-                )
+                    )
             )
     }
 
@@ -169,7 +170,7 @@ class TodoControllerTest : ApiDocumentationBase() {
                     ),
 
 
-                )
+                    )
             )
     }
 
@@ -200,7 +201,7 @@ class TodoControllerTest : ApiDocumentationBase() {
                         parameterWithName("id").description("Todo ID")
                     ),
 
-                )
+                    )
             )
     }
 
@@ -238,7 +239,7 @@ class TodoControllerTest : ApiDocumentationBase() {
                     summary = "Todo 생성 API",
                     requestFields = arrayOf(
                         fieldWithPath("content").description("Todo 내용"),
-                        fieldWithPath("status").description("Todo 상태")
+                        fieldWithPath("status").description("Todo 상태 => ${getEnumValues(Todo.Status::class.java)}")
                     ),
                     responseFields = arrayOf(
                         *commonResponseFields(),

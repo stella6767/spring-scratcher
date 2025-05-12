@@ -149,6 +149,8 @@ tasks.withType<GenerateSwaggerUI> {
     dependsOn("openapi3")
 
     inputFile = layout.buildDirectory.file("api-spec/openapi3.yaml").get().asFile
+    options.set("docExpansion", "none")
+
 
 //    doFirst {
 //

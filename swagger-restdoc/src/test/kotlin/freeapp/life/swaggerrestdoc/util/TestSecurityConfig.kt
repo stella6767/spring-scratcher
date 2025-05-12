@@ -15,7 +15,7 @@ class TestSecurityConfig {
         http
             .csrf { it.disable() }
             .authorizeHttpRequests { auth ->
-                auth.requestMatchers(*arrayOf("/auth/login", "/todo/**")).permitAll()
+                auth.requestMatchers(*arrayOf("/auth/login","/auth/register", "/todo/**")).permitAll()
                     //.requestMatchers("/auth/**").hasAnyRole(User.Role.ADMIN.name,)
                     .anyRequest().authenticated()
             }

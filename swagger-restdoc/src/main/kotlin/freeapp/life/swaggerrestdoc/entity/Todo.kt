@@ -1,5 +1,6 @@
 package freeapp.life.swaggerrestdoc.entity
 
+import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonValue
 import jakarta.persistence.*
 
@@ -42,6 +43,17 @@ class Todo(
         URGENT("긴급"),
         NORMAL("일반"),
         MINOR("경미")
+
+        ;
+
+        companion object {
+            @JvmStatic
+            @JsonCreator
+            fun fromValue(value: String): Status {
+                return values().find { it.value == value }
+                    ?: throw IllegalArgumentException("Unknown Status value: $value")
+            }
+        }
     }
 
 }

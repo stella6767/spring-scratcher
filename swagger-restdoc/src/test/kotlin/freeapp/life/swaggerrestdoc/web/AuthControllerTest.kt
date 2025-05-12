@@ -1,10 +1,7 @@
 package freeapp.life.swaggerrestdoc.web
 
 import freeapp.life.swaggerrestdoc.util.ApiDocumentationBase
-import freeapp.life.swaggerrestdoc.web.dto.LoginReqDto
-import freeapp.life.swaggerrestdoc.web.dto.PasswordReqDto
-import freeapp.life.swaggerrestdoc.web.dto.TokenDto
-import freeapp.life.swaggerrestdoc.web.dto.UserResponseDto
+import freeapp.life.swaggerrestdoc.web.dto.*
 import org.instancio.Instancio
 import org.junit.jupiter.api.Test
 
@@ -156,6 +153,59 @@ class AuthControllerTest : ApiDocumentationBase() {
                     )
                 )
 
+            )
+    }
+
+    @Test
+    fun register() {
+        // Given
+        val uri = "/auth/register"
+
+        val registerDto = RegisterDto(
+            email = "test@test.com",
+            password = "test",
+            username = "test",
+        )
+
+        val userResponseDto = Instancio.of(UserResponseDto::class.java)
+            .create()
+
+        Mockito
+            .`when`(authService.register(registerDto))
+            .thenReturn(userResponseDto)
+
+        // JSON 문자열로 변환
+        val content = objectMapper.writeValueAsString(registerDto)
+
+        // When & Then
+        this.mockMvc.perform(
+            RestDocumentationRequestBuilders.post(uri)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(content)
+                .accept(MediaType.ALL)
+        )
+            .andExpect(status().isOk)
+            .andDo(
+                documentApi(
+                    identifier = "auth-register",
+                    tag = "Auth API",
+                    summary = "회원가입 API",
+                    requestFields = arrayOf(
+                        fieldWithPath("email").description("사용자 이메일"),
+                        fieldWithPath("password").description("사용자 비밀번호"),
+                        fieldWithPath("username").description("사용자 이름"),
+                        // RegisterDto에 추가 필드가 있다면 여기에 추가
+                    ),
+                    responseFields = arrayOf(
+                        *commonResponseFields(),
+                        fieldWithPath("data.id").description("생성된 사용자 ID"),
+                        fieldWithPath("data.email").description("사용자 이메일"),
+                        fieldWithPath("data.username").description("사용자 이름"),
+                        fieldWithPath("data.role").description("사용자 역할"),
+                        fieldWithPath("data.createdAt").description("계정 생성일"),
+                        fieldWithPath("data.updatedAt").description("계정 수정일")
+                    )
+                )
             )
     }
 

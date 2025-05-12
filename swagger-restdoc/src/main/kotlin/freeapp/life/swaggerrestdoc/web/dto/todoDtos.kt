@@ -24,7 +24,6 @@ data class TodoUpdateDto(
     val id: Long,
     @field:NotBlank(message = "content is required")
     val content: String,
-    @field:NotBlank(message = "status is required")
     val status: Todo.Status,
     val isFinish: Boolean,
 )

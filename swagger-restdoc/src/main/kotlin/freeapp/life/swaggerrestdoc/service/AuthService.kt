@@ -3,10 +3,7 @@ package freeapp.life.swaggerrestdoc.service
 import freeapp.life.swaggerrestdoc.config.security.JwtTokenProvider
 import freeapp.life.swaggerrestdoc.config.security.UserPrincipal
 import freeapp.life.swaggerrestdoc.repo.UserRepository
-import freeapp.life.swaggerrestdoc.web.dto.LoginReqDto
-import freeapp.life.swaggerrestdoc.web.dto.PasswordReqDto
-import freeapp.life.swaggerrestdoc.web.dto.TokenDto
-import freeapp.life.swaggerrestdoc.web.dto.UserResponseDto
+import freeapp.life.swaggerrestdoc.web.dto.*
 import jakarta.persistence.EntityNotFoundException
 import org.slf4j.LoggerFactory
 
@@ -26,6 +23,17 @@ class AuthService(
 
     private val log = LoggerFactory.getLogger(this::class.java)
 
+
+    @Transactional
+    fun register(
+        dto: RegisterDto,
+    ): UserResponseDto {
+
+        val encodedPassword =
+            encoder.encode(dto.password)
+
+        return UserResponseDto.fromEntity(userRepository.save(dto.toEntity(encodedPassword)))
+    }
 
     @Transactional
     fun login(loginDto: LoginReqDto): TokenDto {

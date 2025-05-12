@@ -6,6 +6,7 @@ import freeapp.life.swaggerrestdoc.web.dto.SuccessResponse
 import freeapp.life.swaggerrestdoc.web.dto.TodoResponseDto
 import freeapp.life.swaggerrestdoc.web.dto.TodoSaveDto
 import freeapp.life.swaggerrestdoc.web.dto.TodoUpdateDto
+import jakarta.validation.Valid
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.data.web.PageableDefault
@@ -44,7 +45,7 @@ class TodoController(
 
     @PutMapping("")
     fun updateTodo(
-        @RequestBody updateDto: TodoUpdateDto
+        @Valid @RequestBody updateDto: TodoUpdateDto
     ): SuccessResponse<TodoResponseDto> {
 
         val todo =
@@ -68,7 +69,7 @@ class TodoController(
 
     @PostMapping("")
     fun saveTodo(
-        @RequestBody saveDto: TodoSaveDto
+        @Valid @RequestBody saveDto: TodoSaveDto
     ): SuccessResponse<TodoResponseDto> {
 
         return SuccessResponse(

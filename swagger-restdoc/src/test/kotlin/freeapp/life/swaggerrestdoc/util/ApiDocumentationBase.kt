@@ -96,35 +96,7 @@ open class ApiDocumentationBase {
     val fakePrincipal = UserPrincipal(makeClaim())
 
 
-    protected fun write(vararg parameters: ParameterDescriptor): RestDocumentationResultHandler {
-        return MockMvcRestDocumentationWrapper.document(
-            "{class-name}/{method-name}",
-            getDocumentRequest(),
-            Preprocessors.preprocessResponse(Preprocessors.prettyPrint()),
-            // 아래에 resource 스니펫 추가
-            resource(
-                ResourceSnippetParameters.builder()
-                    .queryParameters(*parameters)
-//                    .queryParameters(
-//                        RequestDocumentation.parameterWithName("page").description("페이지 번호 (0부터 시작)").optional(),
-//                        RequestDocumentation.parameterWithName("size").description("페이지 크기").optional()
-//                    )
-                    .description("B2B API") // 각 API에 맞게 설명 추가
-                    .build()
-            )
-        )
-    }
 
-    private fun getDocumentRequest(): OperationRequestPreprocessor {
-        return Preprocessors.preprocessRequest(
-            Preprocessors.modifyUris()
-                .scheme("https")
-                .host("localhost")
-                .removePort(),
-
-            Preprocessors.prettyPrint()
-        )
-    }
 
     protected fun documentApi(
         identifier: String,
@@ -139,7 +111,6 @@ open class ApiDocumentationBase {
         pathParams: Array<ParameterDescriptor> = emptyArray(),
         requestHeaders: Array<HeaderDescriptor> = emptyArray(),
         //pathParams: PathParametersSnippet
-
     ): RestDocumentationResultHandler {
         return document(
             identifier,
@@ -211,7 +182,6 @@ open class ApiDocumentationBase {
 
     protected fun getPageableResponseFields(
         prefix: String = "data",
-        contentType: String = "Todo"
     ): Array<FieldDescriptor> {
         return arrayOf(
 
@@ -235,22 +205,6 @@ open class ApiDocumentationBase {
             fieldWithPath("$prefix.first").description("첫 페이지 여부"),
             fieldWithPath("$prefix.empty").description("결과 비어있음 여부")
         )
-    }
-
-//    /**
-//     * 필드 EnumType description 확장함수 (ENUM 내부 name, label DisplayPropertyEnum 활용 )
-//     */
-//    fun <T : DisplayPropertyEnum> FieldDescriptor.enumTypeAndLabel(enums: List<T>) = apply {
-//        type("ENUM")
-//        attributes(key("enumValues").value(enums.map { "${it.name}: ${it.label}" }))
-//    }
-    /**
-     * 필드 ArrayType description 확장함수(ARRAY 내부 Element Number 지정 확장 함수)
-     */
-
-    fun FieldDescriptor.itemsTypeForNumberArray() = apply {
-        type("ARRAY")
-        attributes(key("itemsType").value("Number"))
     }
 
 
@@ -293,7 +247,6 @@ open class ApiDocumentationBase {
                     .type(it.javaField?.type ?: it.returnType)
             }
         }.toTypedArray()
-
     }
 
 
