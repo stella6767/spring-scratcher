@@ -75,7 +75,7 @@ class AuthControllerTest : ApiDocumentationBase() {
         // When & Then
         this.mockMvc.perform(
             RestDocumentationRequestBuilders.get(uri)
-                .header("Authorization", "Bearer test-token")
+                .header("Authorization", BearerToken)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.ALL)
                 .with(SecurityMockMvcRequestPostProcessors.user(fakePrincipal))
@@ -124,7 +124,7 @@ class AuthControllerTest : ApiDocumentationBase() {
         // When & Then
         this.mockMvc.perform(
             RestDocumentationRequestBuilders.patch(uri)
-                .header("Authorization", "Bearer test-token")
+                .header("Authorization", BearerToken)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(content)
                 .accept(MediaType.ALL)

@@ -1,6 +1,5 @@
 package freeapp.life.swaggerrestdoc.util
 
-import com.epages.restdocs.apispec.MockMvcRestDocumentationWrapper
 import com.epages.restdocs.apispec.MockMvcRestDocumentationWrapper.document
 import com.epages.restdocs.apispec.ParameterDescriptorWithType
 import com.epages.restdocs.apispec.ResourceDocumentation.parameterWithName
@@ -29,15 +28,12 @@ import org.springframework.restdocs.headers.HeaderDocumentation
 import org.springframework.restdocs.hypermedia.LinkDescriptor
 import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation
 import org.springframework.restdocs.mockmvc.RestDocumentationResultHandler
-import org.springframework.restdocs.operation.preprocess.OperationRequestPreprocessor
-import org.springframework.restdocs.operation.preprocess.Preprocessors
 import org.springframework.restdocs.operation.preprocess.Preprocessors.*
 import org.springframework.restdocs.payload.FieldDescriptor
 import org.springframework.restdocs.payload.PayloadDocumentation
 import org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath
 import org.springframework.restdocs.payload.PayloadDocumentation.subsectionWithPath
 import org.springframework.restdocs.request.ParameterDescriptor
-import org.springframework.restdocs.snippet.Attributes.key
 import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers
 import org.springframework.test.context.bean.override.mockito.MockitoBean
 import org.springframework.test.context.junit.jupiter.SpringExtension
@@ -171,8 +167,15 @@ open class ApiDocumentationBase {
             .build()
     }
 
-    protected fun authorizationHeader(): HeaderDescriptor =
-        HeaderDocumentation.headerWithName("Authorization").description("Bearer 인증 토큰")
+
+    val BearerToken =
+        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIxIiwidXNlcm5hbWUiOiJ0ZXN0Iiwicm9sZSI6IlVTRVIiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJhdXRob3JpdGllcyI6IlJPTEVfVVNFUiIsIm5iZiI6MTc0NzA2NjcxNCwic3ViIjoidGVzdEB0ZXN0LmNvbSIsImlhdCI6MTc0NzA2NjcxNCwiZXhwIjoxNzQ5NjU4NzE0fQ.fjXn1OWRMkowTbCuwRwvratbAn_AbHEfKy5JMQXAqek"
+
+    //실제 디코딩 가능한 jwt 입력해야함
+    protected fun authorizationHeader(): HeaderDescriptor {
+
+        return HeaderDocumentation.headerWithName("Authorization").description(BearerToken)
+    }
 
     protected fun commonResponseFields() = arrayOf(
         PayloadDocumentation.fieldWithPath("resultMsg").description("응답 메시지"),
