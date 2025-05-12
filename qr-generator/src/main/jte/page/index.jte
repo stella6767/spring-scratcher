@@ -1,10 +1,8 @@
 @param freeapp.me.qrgenerator.config.QrGeneratorType defaultType = freeapp.me.qrgenerator.config.QrGeneratorType.LINK
 
 @template.layout.main(content = @`
-<%--    <div class="">--%>
-<%--        header--%>
-<%--    </div>--%>
 
+    @template.component.header()
     <div class="bg-gray-100 flex justify-center items-center min-h-screen">
 
         <div class="flex bg-white p-6 rounded-lg shadow-md w-[900px]">

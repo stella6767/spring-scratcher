@@ -1,5 +1,7 @@
 package freeapp.me.qrgenerator.config
 
+import org.springframework.web.multipart.MultipartFile
+
 
 data class TextReqDto(
     val text:String,
@@ -22,4 +24,8 @@ data class WifiReqDto(
 data class CallReqDto(
     val countryCode: String,
     val phoneNumber:String,
+)
+
+data class PDFReqDto(
+    val file: MultipartFile,
 )

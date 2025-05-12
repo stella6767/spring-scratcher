@@ -25,6 +25,10 @@ dependencies {
     implementation("com.google.zxing:javase:3.5.3")
     implementation("com.google.zxing:core:3.5.3")
 
+    implementation(platform("software.amazon.awssdk:bom:2.20.56"))
+    implementation("software.amazon.awssdk:s3")
+
+
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("gg.jte:jte:3.1.16")
@@ -50,4 +54,8 @@ jte {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+tasks.jar {
+    enabled = false
 }

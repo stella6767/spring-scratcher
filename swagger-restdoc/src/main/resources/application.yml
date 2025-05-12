@@ -1,0 +1,62 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+    encoding:
+      charset: utf-8
+      enabled: true
+
+  config:
+    activate:
+      on-profile:
+        - local
+
+spring:
+  application:
+    name: swaggerWithRestDoc
+  profiles:
+    default: local
+
+---
+
+server:
+  config:
+    activate:
+      on-profile:
+        - local
+
+spring:
+  config:
+    activate:
+      on-profile:
+        - local
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:todo
+    username: sa
+    password:
+    hikari:
+      maximum-pool-size: 5
+
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: create
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        default_batch_fetch_size: 1000
+        globally_quoted_identifiers: true
+
+jwt:
+  secretKey: asdadasdadasdasdadadsasdasdadasdadasdasdadadsasd
+  expireMinute: 43200

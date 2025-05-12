@@ -8,20 +8,23 @@ import com.google.zxing.qrcode.QRCodeWriter
 import freeapp.me.qrgenerator.config.*
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
+import org.springframework.web.multipart.MultipartFile
 import java.io.ByteArrayOutputStream
 import java.util.*
 
 
 @Service
 class QrService(
-    private val mapper: ObjectMapper
+    private val mapper: ObjectMapper,
+    private val s3Service: S3Service,
 ) {
 
     private val log = LoggerFactory.getLogger(QrService::class.java)
 
     fun generateStaticQRCodeByType(
         type: QrGeneratorType,
-        qrReqDto: HashMap<String, Any>
+        qrReqDto: HashMap<String, Any>,
+        file: MultipartFile?
     ): String {
         return when (type) {
             QrGeneratorType.LINK, QrGeneratorType.TEXT -> {
@@ -33,7 +36,6 @@ class QrService(
                 val wifiDto =
                     mapper.convertValue(qrReqDto, WifiReqDto::class.java)
                 val qrValue = "WIFI:T:${wifiDto.encryption};S:${wifiDto.ssid};P:${wifiDto.password};;"
-                println(qrValue)
                 generateStaticQRCode(qrValue)
             }
             QrGeneratorType.VCARD -> {
@@ -46,7 +48,6 @@ class QrService(
                     TEL;TYPE=CELL:${vCardDto.phoneNumber}                   
                     END:VCARD
                 """.trimIndent()
-                println(vCard)
                 generateStaticQRCode(vCard)
             }
             QrGeneratorType.TEL -> {
@@ -55,6 +56,9 @@ class QrService(
                 val qrValue = "tel:${callDto.countryCode}${callDto.phoneNumber}"
                 println(qrValue)
                 generateStaticQRCode(qrValue)
+            }
+            QrGeneratorType.PDF -> {
+                generateDynamicQRCode(file!!)
             }
         }
 
@@ -84,6 +88,16 @@ class QrService(
             Base64.getEncoder().encodeToString(outputStream.toByteArray())
 
         return base64Image
+    }
+
+
+
+    fun generateDynamicQRCode(
+        file:MultipartFile
+    ): String {
+        val dynamicUrl =
+            s3Service.putObject(file)
+        return generateStaticQRCode(dynamicUrl)
     }
 
 

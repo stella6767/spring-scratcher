@@ -9,9 +9,15 @@ enum class QrGeneratorType(
 
     LINK("\uD83D\uDD17", "Link"),
     TEXT("\uD83D\uDCC4 ", "Text"),
-    WIFI("\uD83D\uDCDE", "Wifi"),
-    VCARD("\uD83D\uDCE9", "V-Card"),
-    TEL("\uD83D\uDEDC", "Tel"),
+    WIFI( "\uD83D\uDEDC", "Wifi"),
+    VCARD("🪪", "V-Card"),
+    TEL("\uD83D\uDCDE", "Tel"),
+    PDF("\uD83D\uDCDC", "PDF"),
+
+//    todo 귀찮으니까 나중에
+//    IMAGES("\uD83D\uDCDE", "Images"),
+//    PROFILE_CARD("\uD83D\uDCDE", "Profile Card"),
+
 }
 
 

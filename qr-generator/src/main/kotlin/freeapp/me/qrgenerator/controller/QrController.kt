@@ -6,6 +6,7 @@ import io.github.wimdeblauwe.htmx.spring.boot.mvc.HxRequest
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.multipart.MultipartFile
 import org.springframework.web.servlet.view.FragmentsRendering
 
 
@@ -23,8 +24,7 @@ class QrController(
         return "page/index"
     }
 
-    //todo converter && exception handling & dynamic with s3
-    //
+    //todo dynamic with s3
 
     @HxRequest
     @GetMapping("/qr/{type}")
@@ -44,14 +44,18 @@ class QrController(
 
     @HxRequest
     @PostMapping("/qrcode")
-    fun qrcode(
+    fun generateQrCode(
         model: Model,
         @RequestParam type: QrGeneratorType,
-        @RequestParam qrReqDto: HashMap<String, Any>
+        @RequestParam("file") file: MultipartFile? = null,
+        @RequestParam qrReqDto: HashMap<String, Any>,
     ): FragmentsRendering {
 
         val qrCode =
-            qrService.generateStaticQRCodeByType(type, qrReqDto)
+            qrService.generateStaticQRCodeByType(type, qrReqDto, file)
+
+        println(file?.originalFilename)
+
 
         model.addAttribute("imageData", qrCode)
         model.addAttribute("isGenerated", true)
@@ -61,6 +65,7 @@ class QrController(
             .fragment("component/qrCodeBtn")
             .build()
     }
+
 
 
 }

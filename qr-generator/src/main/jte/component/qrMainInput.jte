@@ -67,6 +67,19 @@
             <label class="font-semibold">Phone number</label>
             <input id="Phone-number" name="phoneNumber" type="text" class="p-2 border rounded mt-2" required>
         </div>
+
+    @elseif(type == QrGeneratorType.PDF)
+        <h2 class="font-semibold">PDF QR Code</h2>
+        <p class="font-light">Share PDF Document inside your QR Code.</p>
+        <button
+                onclick="var input = document.getElementById('fileInput')
+                   input.click(); input.classList.remove('hidden')  "
+                class="mt-2 w-1/2 border rounded p-2 h-[50px] cursor-pointer hover:bg-[#b4b4b480]" >
+            Upload Now
+        </button>
+        <input type="file" id="fileInput" name="file"
+               class="hidden">
+
     @else
         <div></div>
     @endif

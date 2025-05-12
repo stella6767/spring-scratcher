@@ -25,6 +25,7 @@
         </button>
     @else
         <button
+                hx-encoding="multipart/form-data"
                 id="qr-generate-btn"
                 hx-post="/qrcode?type=${type.name()}"
                 hx-target="#qr-container"
