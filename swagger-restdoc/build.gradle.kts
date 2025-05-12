@@ -39,7 +39,7 @@ openapi3 {
     } as Closure<Server>
 
     val dev = closureOf<Server> {
-        url("https://b2b.freeapp.me")
+        url("https://dev-api.freeapp.me")
         description("dev Development Server")
     } as Closure<Server>
 
@@ -151,25 +151,6 @@ tasks.withType<GenerateSwaggerUI> {
     inputFile = layout.buildDirectory.file("api-spec/openapi3.yaml").get().asFile
     options.set("docExpansion", "none")
 
-
-//    doFirst {
-//
-//        val securitySchemesContent = """
-//            |  securitySchemes:
-//            |    APIKey:
-//            |      type: apiKey
-//            |      name: Authorization
-//            |      in: header
-//            |security:
-//            |  - APIKey: []  # Apply the security scheme here
-//        """.trimMargin()
-//
-//        if (inputFile.exists()) {
-//            inputFile.appendText(securitySchemesContent)
-//        } else {
-//            throw GradleException("Input file ${inputFile.absolutePath} does not exist.")
-//        }
-//    }
 }
 
 
