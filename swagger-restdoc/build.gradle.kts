@@ -89,7 +89,7 @@ dependencies {
     testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
     testImplementation("org.springframework.security:spring-security-test")
     testImplementation("com.epages:restdocs-api-spec-mockmvc:0.19.0")
-
+    testImplementation("org.instancio:instancio-junit:5.4.1")
 
     // Swagger UI
     swaggerUI ("org.webjars:swagger-ui:5.21.0")
