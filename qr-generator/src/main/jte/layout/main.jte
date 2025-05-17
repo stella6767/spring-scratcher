@@ -4,10 +4,10 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
-    <script src="https://unpkg.com/htmx.org@2.0.4"></script>
     <script defer src="/custom.js"></script>
+    <script defer src="/htmx.min.js"></script>
     <link href="/custom.css" rel="stylesheet">
+    <link href="/output.css" rel="stylesheet">
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
     <meta charset="UTF-8">
     <meta content="stella6767" name="author">

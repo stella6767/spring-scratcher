@@ -1,4 +1,4 @@
-
+HELP.md
 .gradle
 build/
 !gradle/wrapper/gradle-wrapper.jar
@@ -16,6 +16,7 @@ build/
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
+node_modules
 
 ### IntelliJ IDEA ###
 .idea
@@ -26,10 +27,6 @@ out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 
-secret.yml
-secrets.tar.gz
-secrets_base64.txt
-
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
@@ -39,7 +36,6 @@ secrets_base64.txt
 
 ### VS Code ###
 .vscode/
-node_modules
 
 ### JTE ###
 /jte-classes/
